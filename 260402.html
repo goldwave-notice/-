@@ -6,73 +6,19 @@
   <title>GOLD WAVE PREMIUM REPORT</title>
   <style>
     @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-
-    body {
-      margin: 0;
-      background-color: #0b0d11; 
-      font-family: 'Pretendard', sans-serif;
-      color: #e0e0e0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-bottom: 50px;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 800px;
-      padding: 20px;
-      box-sizing: border-box;
-      text-align: center;
-    }
-
-    /* 상단 공백 유지 (요청사항) */
-    .header-space { height: 50px; }
-
-    .main-card {
-      width: 100%;
-      border-radius: 15px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-      margin-top: 20px;
-    }
-
-    .report-box {
-      margin-top: 40px;
-      text-align: left;
-      background: rgba(255, 255, 255, 0.03);
-      padding: 30px;
-      border-radius: 20px;
-      border: 1px solid rgba(191, 149, 63, 0.2);
-    }
-
-    h1 {
-      color: #bf953f;
-      font-size: 24px;
-      margin-bottom: 20px;
-      border-left: 4px solid #bf953f;
-      padding-left: 15px;
-      line-height: 1.4;
-    }
-
-    .strategy-card {
-      background: #161a21;
-      padding: 20px;
-      border-radius: 12px;
-      border-left: 5px solid #bf953f;
-      margin-top: 25px;
-    }
-
-    .strategy-title {
-      color: #bf953f;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
+    body { margin: 0; background-color: #0b0d11; font-family: 'Pretendard', sans-serif; color: #e0e0e0; display: flex; flex-direction: column; align-items: center; padding-bottom: 50px; }
+    .container { width: 100%; max-width: 800px; padding: 20px; box-sizing: border-box; text-align: center; }
+    .header-space { height: 50px; } /* 원칙 1: 상단 공백 */
+    .main-card { width: 100%; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); margin-top: 20px; }
+    .report-box { margin-top: 40px; text-align: left; background: rgba(255, 255, 255, 0.03); padding: 30px; border-radius: 20px; border: 1px solid rgba(191, 149, 63, 0.2); }
+    h1 { color: #bf953f; font-size: 24px; margin-bottom: 20px; border-left: 4px solid #bf953f; padding-left: 15px; line-height: 1.4; }
+    .strategy-card { background: #161a21; padding: 20px; border-radius: 12px; border-left: 5px solid #bf953f; margin-top: 25px; }
+    .strategy-title { color: #bf953f; font-weight: bold; margin-bottom: 10px; }
     ul { padding-left: 20px; margin: 0; }
     li { margin-bottom: 10px; color: #ccc; }
     b { color: #ffffff; }
 
-    /* 🗞️ PREVIOUS REPORT 카드 스타일 (이미지 1번 스타일 통일) */
+    /* 원칙 2: 지난뉴스 하단 카드 스타일 */
     .prev-section-title { color: #555; font-size: 12px; letter-spacing: 4px; margin-top: 80px; margin-bottom: 30px; text-transform: uppercase; font-weight: 700; }
     .prev-card {
       display: flex; align-items: center; background: #161a21;
@@ -90,27 +36,26 @@
   </style>
 </head>
 <body>
-
   <div class="container">
-    <div class="header-space"></div> <img src="https://i.imgur.com/vtequNN.jpeg" alt="오늘의 뉴스" class="main-card">
+    <div class="header-space"></div>
+    <img src="https://i.imgur.com/새로운이미지주소.png" alt="금 선물 붕괴 뉴스" class="main-card">
 
     <div class="report-box">
-      <h1>📌 오늘의 핵심 브리핑<br>[트럼프 '에픽 퓨리' 경고... 금(Gold) 시장의 트리거 될까?]</h1>
-      
-      <p>도널드 트럼프 대통령이 이란에 대한 <b>'추가 군사 공격'</b>을 공식화하며 금융시장이 '극단적 공포(지수 16)' 구간에 진입했습니다. 유가가 105달러를 돌파하고 비트코인이 4.7% 급락하는 혼돈 속에서, 자산 시장의 시선은 다시 <b>안전 자산의 종착지인 '금(Gold)'</b>으로 향하고 있습니다.</p>
+      <h1>📌 오늘의 핵심 브리핑<br>[금 선물 4,600달러 붕괴... 하루새 시총 1,500조 증발]</h1>
+      <p>금값이 온스당 <b>4,600달러 지지선</b>을 하향 돌파하며 시장에 충격을 주고 있습니다. 트럼프 연설 이후 하루 만에 금 시장에서만 <b>1조 달러(약 1,500조 원)</b>가 증발했습니다. 지정학적 리스크가 위험 회피를 자극하기보다, 오히려 인플레이션 우려와 금리 인하 기대 후퇴로 이어지며 금 가격을 압박하고 있습니다.</p>
       
       <div class="strategy-card">
         <div class="strategy-title">💡 골드웨이브 전략 가이드</div>
         <ul>
-          <li><b>지정학적 리스크와 금:</b> 전쟁 공포는 금값의 하방 경직성을 확보해 줍니다. 다만 국채 수익률 상승과 팽팽하게 맞서며 단기 변동성이 커질 수 있습니다.</li>
-          <li><b>인플레이션 헤지 수요:</b> 배럴당 105달러를 돌파한 유가는 강력한 인플레이션을 예고합니다. 화폐 가치 하락에 대비한 실물 금 매수세가 유입될 가능성이 높습니다.</li>
-          <li><b>AI 실시간 분석:</b> 골드웨이브 AI는 현재 '공포 지수 16' 구간을 역발상 매수 기회로 볼 것인지, 추가 하락의 전조로 볼 것인지 거래량을 통해 정밀 분석 중입니다.</li>
+          <li><b>심리적 저지선 붕괴:</b> 4,600달러 돌파로 인해 단기 패닉 셀 가능성이 높아졌습니다. 보수적 대응이 필요합니다.</li>
+          <li><b>인플레이션과 금리:</b> 유가 상승이 물가를 자극하며 연준의 긴축 기조가 길어질 수 있다는 공포가 금값의 하락을 유도하고 있습니다.</li>
+          <li><b>시장 재편의 전조:</b> 대규모 자금 이탈은 곧 새로운 주도 자산의 등장을 예고하기도 합니다. AI 실시간 자금 흐름에 주목하세요.</li>
         </ul>
       </div>
     </div>
 
     <div class="prev-section-title">PREVIOUS REPORT</div>
-    <a href="260401-2.html" class="prev-card">
+    <a href="206401-2.html" class="prev-card">
       <img src="https://i.imgur.com/DQ55lYw.png" class="prev-thumb" alt="지난뉴스">
       <div class="prev-info">
         <span class="prev-label">LATEST REPORT #02</span>
@@ -118,9 +63,7 @@
       </div>
     </a>
 
-    <div class="footer-links">
-      © GOLD WAVE. All rights reserved.
-    </div>
+    <div class="footer-links">© GOLD WAVE. All rights reserved.</div>
   </div>
 
   <div style="margin-top: 60px; text-align: center; padding-bottom: 50px;">
@@ -130,6 +73,5 @@
     </span>
   </div>
   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
 </body>
 </html>
