@@ -10,6 +10,7 @@
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     
     <style>
+        /* [1] 기본 레이아웃 스타일 */
         body {
             margin: 0; padding: 0;
             background-color: #ffffff;
@@ -20,11 +21,11 @@
             align-items: center;
         }
 
-        /* 1. 상단 히어로 섹션 (모눈종이 탈출! 리얼 금가루 배경) */
+        /* [2] 상단 히어로 섹션 (리얼 스타더스트 배경) */
         .hero-section {
             width: 100%;
             background-color: #000000;
-            /* ⭐ 규칙성을 깨기 위해 각기 다른 크기와 간격의 그라데이션을 4겹으로 레이어링 ⭐ */
+            /* 무작위로 흩뿌려진 금가루 파티클 효과 */
             background-image: 
                 radial-gradient(1px 1px at 10% 20%, #ffffff 100%, transparent),
                 radial-gradient(1.5px 1.5px at 35% 45%, #bf953f 100%, transparent),
@@ -39,7 +40,7 @@
             border-bottom: 3px solid #bf953f;
         }
 
-        /* 랑랑쌤의 최애: 맥박 뛰는 골드 로고 */
+        /* 로고 맥박(숨쉬기) 애니메이션 */
         .premium-logo {
             width: 70px;
             height: auto;
@@ -55,7 +56,7 @@
             100% { filter: drop-shadow(0 0 5px rgba(191, 149, 63, 0.4)); transform: scale(1); }
         }
 
-        /* 쨍! 한 골드 텍스트 (안개 효과 완전 박멸) */
+        /* 쨍한 골드 브랜드 타이틀 */
         .brand-title {
             margin: 0;
             font-family: 'Montserrat', sans-serif;
@@ -70,7 +71,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             -webkit-text-stroke: 1px #bf953f; 
-            /* 뿌연 블러 대신 날카로운 그림자만 사용 */
             filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.9));
         }
 
@@ -85,27 +85,27 @@
             text-transform: uppercase;
         }
 
-        /* ⭐ 한글 슬로건: 1.5배 작고 아주 가는(100) Sans 서체 ⭐ */
+        /* 한글 슬로건 (가는 Sans 계열) */
         .slogan-ko {
             margin-top: 10px;
             font-family: 'Pretendard', sans-serif;
-            font-size: 10.5px; /* 영문 대비 약 1.5배 축소 */
-            font-weight: 100; /* 극강의 가늘기 */
-            color: rgba(255, 255, 255, 0.6); /* 은은한 화이트 골드 톤 */
+            font-size: 10.5px;
+            font-weight: 100;
+            color: rgba(255, 255, 255, 0.6);
             letter-spacing: 1px;
         }
 
-        /* 2. 하단 콘텐츠 영역 */
+        /* [3] 하단 콘텐츠 영역 */
         .content-container {
             width: 100%;
             max-width: 950px;
-            padding: 40px 20px 100px 20px;
+            padding: 40px 20px 60px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* 시스템 상태 표시 (날짜 위 배치) */
+        /* 시스템 가동 상태 바 */
         .status-badge {
             display: inline-flex;
             align-items: center;
@@ -140,12 +140,13 @@
             letter-spacing: 1px;
         }
 
-        /* 아이콘 그리드 */
+        /* [4] 메인 아이콘 그리드 */
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 15px;
             width: 100%;
+            margin-bottom: 50px;
         }
 
         .nav-card {
@@ -171,9 +172,49 @@
             border: 2px solid #bf953f;
         }
 
+        /* [5] VVIP 동전 메달 버튼 (빨간펜 위치) */
+        .medal-hook-container {
+            text-align: center;
+            margin: 20px 0 80px 0;
+            position: relative;
+            z-index: 20;
+        }
+
+        .medal-link { text-decoration: none; display: inline-block; }
+
+        .gold-medal {
+            width: 200px; /* 웅장한 크기 */
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 4px 10px rgba(184, 134, 11, 0.3));
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .medal-link:hover .gold-medal {
+            transform: translateY(-10px) scale(1.05);
+            filter: drop-shadow(0 20px 40px rgba(191, 149, 63, 0.25)) brightness(1.1);
+        }
+
+        /* 메달 아래 텍스트 스타일 (가는 Sans) */
+        .medal-text {
+            margin: 15px 0 0 0;
+            font-family: 'Pretendard', sans-serif;
+            font-size: 14px;
+            color: #aa771c;
+            letter-spacing: 2px;
+            font-weight: 300; /* 가늘게 */
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .medal-link:hover .medal-text { color: #bf953f; }
+
+        /* 모바일 대응 */
         @media (max-width: 700px) {
             .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
             .brand-title { font-size: 30px; letter-spacing: 4px; }
+            .gold-medal { width: 160px; }
         }
     </style>
 </head>
@@ -206,9 +247,17 @@
             <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/faq.html'"><img src="https://i.imgur.com/XCVCrRj.png"></div>
             <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/remote.html'"><img src="https://i.imgur.com/CYBeRLN.png"></div>
         </div>
+
+        <div class="medal-hook-container">
+            <a href="텔레그램_채널_링크" target="_blank" class="medal-link">
+                <img src="https://i.imgur.com/71d0VYw.png" alt="VVIP Medal" class="gold-medal">
+                <p class="medal-text">텔레그램 공지방 채널 바로가기</p>
+            </a>
+        </div>
     </div>
 
     <script>
+        // 오늘 날짜 자동 생성
         const today = new Date();
         const y = today.getFullYear();
         const m = String(today.getMonth() + 1).padStart(2, '0');
