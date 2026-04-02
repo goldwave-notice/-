@@ -8,96 +8,121 @@
     @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
     body {
-      margin: 0; background-color: #0b0d11; font-family: 'Pretendard', sans-serif; color: #e0e0e0;
+      margin: 0; background-color: #f4f5f7; font-family: 'Pretendard', sans-serif; color: #333;
       display: flex; flex-direction: column; align-items: center; min-height: 100vh;
     }
 
-    /* 🏛️ 헤더 섹션 */
+    /* 🏛️ 상단 네이비 & 골드 바 */
     header {
-      width: 100%; max-width: 800px; padding: 40px 20px; text-align: center;
+      width: 100%; height: 60px; background: linear-gradient(to right, #0b0d11 30%, #bf953f 100%);
+      display: flex; justify-content: space-between; align-items: center; padding: 0 20px; box-sizing: border-box;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2); position: sticky; top: 0; z-index: 100;
     }
-    .logo { color: #bf953f; font-size: 28px; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; }
-    .sub-logo { color: #555; font-size: 12px; margin-top: 10px; letter-spacing: 2px; }
+    .logo { color: #fff; font-size: 18px; font-weight: 800; letter-spacing: 2px; }
+    .nav-links { color: #fff; font-size: 12px; opacity: 0.8; }
 
-    .container { width: 100%; max-width: 800px; padding: 0 20px 60px; box-sizing: border-box; }
-
-    /* 🗞️ 메인 뉴스 카드 (오늘의 리포트) */
-    .main-news-section { margin-bottom: 40px; }
-    .section-title { color: #bf953f; font-size: 14px; font-weight: 800; margin-bottom: 15px; text-align: left; border-left: 3px solid #bf953f; padding-left: 10px; }
-    
-    .featured-card {
-      background: linear-gradient(145deg, #161a21, #0b0d11);
-      border-radius: 20px; border: 1px solid rgba(191,149,63,0.3);
-      padding: 20px; display: flex; align-items: center; text-decoration: none; transition: 0.3s;
+    /* 🏷️ 중앙 타이틀 섹션 */
+    .hero-section {
+      text-align: center; padding: 60px 20px 40px; background: #fff; width: 100%;
     }
-    .featured-card:hover { transform: translateY(-5px); border-color: #bf953f; box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
-    .featured-thumb { width: 120px; height: 120px; border-radius: 12px; object-fit: cover; margin-right: 20px; }
-    .featured-info { flex: 1; text-align: left; }
-    .featured-date { color: #bf953f; font-size: 11px; font-weight: 800; margin-bottom: 5px; display: block; }
-    .featured-title { color: #fff; font-size: 18px; font-weight: 700; line-height: 1.4; word-break: keep-all; }
+    .special-label { color: #bf953f; font-size: 14px; font-weight: 700; letter-spacing: 3px; margin-bottom: 10px; display: block; }
+    .hero-title { color: #1a1c21; font-size: 32px; font-weight: 900; margin: 10px 0; letter-spacing: -1px; }
+    .hero-sub { color: #777; font-size: 14px; font-weight: 500; }
 
-    /* 🎛️ 6구 대시보드 그리드 */
+    /* 🎛️ 6구 카드형 메뉴 그리드 */
+    .container { width: 100%; max-width: 900px; padding: 40px 20px; box-sizing: border-box; }
     .menu-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
     }
-    .menu-item {
-      background: #161a21; border: 1px solid rgba(255,255,255,0.05); border-radius: 15px;
-      padding: 30px 20px; text-decoration: none; text-align: center; transition: 0.3s;
-    }
-    .menu-item:hover { background: rgba(191,149,63,0.1); border-color: rgba(191,149,63,0.4); transform: translateY(-3px); }
-    .menu-icon { font-size: 24px; margin-bottom: 10px; display: block; }
-    .menu-text { color: #fff; font-size: 14px; font-weight: 600; letter-spacing: 1px; }
-    .menu-sub { color: #555; font-size: 11px; margin-top: 5px; }
+    
+    @media (max-width: 768px) { .menu-grid { grid-template-columns: repeat(2, 1fr); } }
 
-    .footer { margin-top: auto; padding: 40px; font-size: 12px; color: #333; letter-spacing: 1px; }
+    .menu-card {
+      background: #2a2d35; border-radius: 15px; border: 4px solid #e2c275;
+      padding: 30px 15px; text-decoration: none; text-align: center; position: relative;
+      transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .menu-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(191,149,63,0.3); }
+    
+    .menu-icon { font-size: 32px; margin-bottom: 15px; display: block; filter: sepia(1) saturate(5) hue-rotate(10deg); }
+    .menu-text { color: #fff; font-size: 15px; font-weight: 700; line-height: 1.4; word-break: keep-all; }
+    
+    /* 카드 하단 점 세개 장식 */
+    .dot-deco { margin-top: 15px; display: flex; justify-content: center; gap: 5px; }
+    .dot { width: 4px; height: 4px; background: #bf953f; border-radius: 50%; opacity: 0.5; }
+
+    /* 🗞️ 하단 LATEST NEWS 바 */
+    .news-ticker {
+      width: 100%; max-width: 860px; background: #fff; border: 2px solid #e2c275;
+      border-radius: 50px; margin-top: 40px; padding: 15px 30px; display: flex;
+      justify-content: space-between; align-items: center; box-sizing: border-box;
+      text-decoration: none; transition: 0.3s;
+    }
+    .news-ticker:hover { background: #fffdf5; border-color: #bf953f; }
+    .ticker-label { color: #1a1c21; font-size: 14px; font-weight: 900; letter-spacing: 1px; border-right: 1px solid #ddd; padding-right: 15px; }
+    .ticker-content { color: #555; font-size: 13px; flex: 1; padding: 0 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .ticker-arrow { color: #bf953f; font-weight: 900; }
+
+    .footer { margin-top: 50px; padding: 40px; font-size: 12px; color: #aaa; }
   </style>
 </head>
 <body>
 
   <header>
     <div class="logo">GOLD WAVE</div>
-    <div class="sub-logo">PREMIUM INVESTMENT REPORT</div>
+    <div class="nav-links">Announcement | Reports | Log out</div>
   </header>
 
-  <div class="container">
-    
-    <section class="main-news-section">
-      <div class="section-title">LATEST REPORT</div>
-      <a href="260402.html" class="featured-card">
-        <img src="https://i.imgur.com/EskBuKu.jpeg" class="featured-thumb" alt="오늘뉴스">
-        <div class="featured-info">
-          <span class="featured-date">26.04.02 #03</span>
-          <div class="featured-title">금 4,600달러 붕괴...<br>하루새 시총 1,500조 원 증발 쇼크</div>
-        </div>
-      </a>
-    </section>
+  <section class="hero-section">
+    <span class="special-label">SPECIAL REPORT</span>
+    <h1 class="hero-title">SPECIAL REPORT</h1>
+    <p class="hero-sub">골드웨이브만의 특별한 인사이트를 지금 확인하십시오!</p>
+  </section>
 
-    <div class="section-title">DASHBOARD MENU</div>
+  <div class="container">
     <div class="menu-grid">
-      <a href="archive.html" class="menu-item">
-        <span class="menu-icon">📁</span>
-        <span class="menu-text">REPORT ARCHIVE</span>
-        <span class="menu-sub">지난 뉴스 전체 보기</span>
+      <a href="#" class="menu-card">
+        <span class="menu-icon">📄</span>
+        <div class="menu-text">골드웨이브<br>초간단 사용 설명서</div>
+        <div class="dot-deco"><div class="dot"></div><div class="dot" style="opacity:1"></div><div class="dot"></div></div>
       </a>
       
-      <div class="menu-item" style="opacity: 0.4;">
-        <span class="menu-icon">🤖</span>
-        <span class="menu-text">AI SIGNALS</span>
-        <span class="menu-sub">준비 중</span>
-      </div>
+      <a href="#" class="menu-card">
+        <span class="menu-icon">💬</span>
+        <div class="menu-text">FAQ & QnA<br>카테고리</div>
+        <div class="dot-deco"><div class="dot"></div><div class="dot" style="opacity:1"></div><div class="dot"></div></div>
+      </a>
 
-      <div class="menu-item" style="opacity: 0.4;">
-        <span class="menu-icon">📈</span>
-        <span class="menu-text">MARKET DATA</span>
-        <span class="menu-sub">준비 중</span>
-      </div>
+      <a href="#" class="menu-card">
+        <span class="menu-icon">📊</span>
+        <div class="menu-text">실시간 수익 확인</div>
+        <div class="dot-deco"><div class="dot"></div><div class="dot" style="opacity:1"></div><div class="dot"></div></div>
+      </a>
 
-      <div class="menu-item" style="opacity: 0.4;">
-        <span class="menu-icon">📢</span>
-        <span class="menu-text">NOTICE</span>
-        <span class="menu-sub">준비 중</span>
-      </div>
+      <a href="archive.html" class="menu-card">
+        <span class="menu-icon">📁</span>
+        <div class="menu-text">프리미엄 리포트<br>아카이브</div>
+        <div class="dot-deco"><div class="dot"></div><div class="dot" style="opacity:1"></div><div class="dot"></div></div>
+      </a>
+
+      <a href="#" class="menu-card">
+        <span class="menu-icon">⚙️</span>
+        <div class="menu-text">자동 매매 시스템</div>
+        <div class="dot-deco"><div class="dot"></div><div class="dot" style="opacity:1"></div><div class="dot"></div></div>
+      </a>
+
+      <a href="#" class="menu-card">
+        <span class="menu-icon">🎧</span>
+        <div class="menu-text">원격 지원 시스템</div>
+        <div class="dot-deco"><div class="dot"></div><div class="dot" style="opacity:1"></div><div class="dot"></div></div>
+      </a>
     </div>
+
+    <a href="260402.html" class="news-ticker">
+      <span class="ticker-label">LATEST NEWS</span>
+      <span class="ticker-content">금 선물 4,600달러 붕괴... 하루새 시총 1,500조 원 증발 쇼크</span>
+      <span class="ticker-arrow">&gt;</span>
+    </a>
 
     <div class="footer">
       © GOLD WAVE. All rights reserved.
@@ -105,9 +130,8 @@
   </div>
 
   <div style="text-align: center; padding-bottom: 50px;">
-    <span style="font-size: 11px; color: #1c2128; letter-spacing: 1px;">
-      TOTAL VISITORS : 
-      <span id="busuanzi_value_site_pv" style="margin-left: 5px; opacity: 0.5;">0</span>
+    <span id="busuanzi_container_site_pv" style="font-size: 11px; color: #ccc;">
+      TOTAL VISITORS : <span id="busuanzi_value_site_pv">0</span>
     </span>
   </div>
   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
