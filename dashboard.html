@@ -6,42 +6,44 @@
     <title>GOLD WAVE PREMIUM DASHBOARD</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Pretendard:wght@300;700&display=swap" rel="stylesheet">
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     
     <style>
         body {
             margin: 0; padding: 0;
             background-color: #ffffff;
-            font-family: 'Pretendard', -apple-system, sans-serif;
+            font-family: 'Pretendard', sans-serif;
             color: #333;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* 1. 상단 히어로 섹션 (안개 제거 + 선명한 금가루) */
+        /* 1. 상단 히어로 섹션 (심연의 블랙 + 금가루 레이어) */
         .hero-section {
             width: 100%;
-            /* ⭐ 안개(Blur) 효과를 유발하던 그라데이션 오버레이를 걷어내고 배경 이미지를 쨍하게 노출 ⭐ */
-            background-color: #000000; 
-            background-image: url('https://i.imgur.com/89.png'); /* 금가루 파티클 */
-            background-size: cover;
-            background-position: center;
-            padding: 60px 0 55px 0;
+            background-color: #000000;
+            /* ⭐ 이미지 경로 대신 코드로 금가루 파티클 느낌 구현 ⭐ */
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.15) 1px, transparent 1px),
+                radial-gradient(circle at 80% 70%, rgba(191, 149, 63, 0.2) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0.5px, transparent 0.5px),
+                linear-gradient(180deg, rgba(0,0,0,0) 70%, rgba(191,149,63,0.1) 100%);
+            background-size: 30px 30px, 50px 50px, 20px 20px, 100% 100%;
+            padding: 55px 0 65px 0;
             text-align: center;
             position: relative;
             border-bottom: 3px solid #bf953f;
         }
 
-        /* ⭐ 랑랑쌤의 최애: 맥박 뛰는 골드 로고 ⭐ */
+        /* 랑랑쌤의 최애: 맥박 뛰는 골드 로고 */
         .premium-logo {
-            width: 75px;
+            width: 70px;
             height: auto;
             margin-bottom: 15px;
             position: relative;
             z-index: 10;
-            /* 멈췄다 빛나고 멈췄다 빛나는 숨쉬기 애니메이션 */
             animation: gold-pulse 2.5s infinite ease-in-out;
         }
 
@@ -51,39 +53,44 @@
             100% { filter: drop-shadow(0 0 5px rgba(191, 149, 63, 0.4)); transform: scale(1); }
         }
 
-        /* ⭐ 랑랑쌤의 요청: 뿌연거 싹 잡은 쨍! 한 골드 텍스트 ⭐ */
+        /* 쨍! 한 골드 텍스트 (블러 완전 제거) */
         .brand-title {
             margin: 0;
             font-family: 'Montserrat', sans-serif;
-            font-size: 46px;
+            font-size: 44px;
             letter-spacing: 8px;
             font-weight: 900;
             text-transform: uppercase;
             font-style: italic;
             position: relative;
             z-index: 10;
-            
-            /* 입체 골드 그라데이션 */
             background: linear-gradient(to bottom, #fff6a5 0%, #ffcc00 25%, #bf953f 50%, #fcf6ba 75%, #aa771c 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            
-            /* ⭐ 쨍함을 위한 '필터' 블러 제거 및 '테두리' 강화 ⭐ */
-            -webkit-text-stroke: 1.2px #bf953f; 
-            /* 뿌옇게 만드는 filter: blur 계열은 모두 삭제했습니다! */
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8));
+            -webkit-text-stroke: 1px #bf953f; 
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.9));
         }
 
-        .slogan {
-            margin-top: 12px;
+        /* 영문 슬로건 */
+        .slogan-en {
+            margin-top: 15px;
             font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
-            font-weight: 800;
+            font-size: 15px; /* 기준 크기 */
+            font-weight: 700;
             color: #d4af37;
             letter-spacing: 4px;
             text-transform: uppercase;
-            position: relative;
-            z-index: 10;
+        }
+
+        /* ⭐ 한글 슬로건: 1.5배 작고 가는 폰트 ⭐ */
+        .slogan-ko {
+            margin-top: 8px;
+            font-family: 'Pretendard', sans-serif;
+            font-size: 10px; /* 15px 기준 약 1.5배 작은 10px */
+            font-weight: 300; /* 아주 가는 폰트체 */
+            color: #c0c0c0; /* 세련된 연회색 금속 느낌 */
+            letter-spacing: 1px;
+            opacity: 0.8;
         }
 
         /* 2. 하단 콘텐츠 영역 */
@@ -91,7 +98,6 @@
             width: 100%;
             max-width: 950px;
             padding: 40px 20px 100px 20px;
-            box-sizing: border-box;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -164,16 +170,16 @@
         @media (max-width: 700px) {
             .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
             .brand-title { font-size: 30px; letter-spacing: 4px; }
-            .hero-section { padding: 40px 0 40px 0; }
         }
     </style>
 </head>
 <body>
 
     <div class="hero-section">
-        <img src="https://i.imgur.com/9VUt3sN.png" alt="Gold Wave Logo" class="premium-logo">
+        <img src="https://i.imgur.com/9VUt3sN.png" alt="Logo" class="premium-logo">
         <h1 class="brand-title">GOLD WAVE</h1>
-        <div class="slogan">STAY AHEAD, RIGHT HERE.</div>
+        <div class="slogan-en">STAY AHEAD, RIGHT HERE.</div>
+        <div class="slogan-ko">앞서 나가고 싶은 당신, 이곳이 바로 출발점입니다.</div>
     </div>
 
     <div class="content-container">
