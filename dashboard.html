@@ -10,10 +10,8 @@
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     
     <style>
-        /* 기본 레이아웃 */
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             background-color: #ffffff;
             font-family: 'Pretendard', -apple-system, sans-serif;
             color: #333;
@@ -22,39 +20,38 @@
             align-items: center;
         }
 
-        /* 1. 상단 히어로 섹션 (블랙 배경 + 쨍한 반짝이 가루) */
+        /* 1. 상단 히어로 섹션 (안개 제거 + 선명한 금가루) */
         .hero-section {
             width: 100%;
-            /* 랑랑쌤이 원하신 블랙 바탕에 금가루가 팍팍 뿌려진 배경 */
-            background: 
-                linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(10, 15, 25, 0.9) 100%),
-                url('https://i.imgur.com/89.png'); /* 황금 파티클 이미지 */
+            /* ⭐ 안개(Blur) 효과를 유발하던 그라데이션 오버레이를 걷어내고 배경 이미지를 쨍하게 노출 ⭐ */
+            background-color: #000000; 
+            background-image: url('https://i.imgur.com/89.png'); /* 금가루 파티클 */
             background-size: cover;
-            background-position: bottom center;
-            padding: 60px 0 50px 0;
+            background-position: center;
+            padding: 60px 0 55px 0;
             text-align: center;
             position: relative;
-            overflow: hidden;
-            border-bottom: 3px solid #bf953f; /* 선명한 골드 경계선 */
+            border-bottom: 3px solid #bf953f;
         }
 
-        /* ⭐ 로고 애니메이션: 금색으로 빛나고 멈추고 반복 (Breathe) ⭐ */
+        /* ⭐ 랑랑쌤의 최애: 맥박 뛰는 골드 로고 ⭐ */
         .premium-logo {
             width: 75px;
             height: auto;
             margin-bottom: 15px;
             position: relative;
             z-index: 10;
-            animation: gold-glow 2.5s infinite ease-in-out;
+            /* 멈췄다 빛나고 멈췄다 빛나는 숨쉬기 애니메이션 */
+            animation: gold-pulse 2.5s infinite ease-in-out;
         }
 
-        @keyframes gold-glow {
-            0% { filter: drop-shadow(0 0 5px rgba(191, 149, 63, 0.5)); transform: scale(1); }
+        @keyframes gold-pulse {
+            0% { filter: drop-shadow(0 0 5px rgba(191, 149, 63, 0.4)); transform: scale(1); }
             50% { filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.9)); transform: scale(1.08); }
-            100% { filter: drop-shadow(0 0 5px rgba(191, 149, 63, 0.5)); transform: scale(1); }
+            100% { filter: drop-shadow(0 0 5px rgba(191, 149, 63, 0.4)); transform: scale(1); }
         }
 
-        /* ⭐ 랑랑쌤의 요청: 뿌연거 싹 잡은 쨍한 골드 텍스트 ⭐ */
+        /* ⭐ 랑랑쌤의 요청: 뿌연거 싹 잡은 쨍! 한 골드 텍스트 ⭐ */
         .brand-title {
             margin: 0;
             font-family: 'Montserrat', sans-serif;
@@ -66,19 +63,17 @@
             position: relative;
             z-index: 10;
             
-            /* 쨍한 금속 질감 그라데이션 */
+            /* 입체 골드 그라데이션 */
             background: linear-gradient(to bottom, #fff6a5 0%, #ffcc00 25%, #bf953f 50%, #fcf6ba 75%, #aa771c 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             
-            /* 쨍함을 위한 선명한 테두리 */
-            -webkit-text-stroke: 1px rgba(212, 175, 55, 0.8);
-            
-            /* 선명한 그림자 (블러 0.3px로 최소화) */
-            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.6)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.7));
+            /* ⭐ 쨍함을 위한 '필터' 블러 제거 및 '테두리' 강화 ⭐ */
+            -webkit-text-stroke: 1.2px #bf953f; 
+            /* 뿌옇게 만드는 filter: blur 계열은 모두 삭제했습니다! */
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8));
         }
 
-        /* 슬로건 */
         .slogan {
             margin-top: 12px;
             font-family: 'Montserrat', sans-serif;
@@ -102,7 +97,6 @@
             align-items: center;
         }
 
-        /* 시스템 상태 (날짜 위 배치) */
         .status-badge {
             display: inline-flex;
             align-items: center;
@@ -120,10 +114,10 @@
             border-radius: 50%;
             margin-right: 12px;
             box-shadow: 0 0 10px #00ff00;
-            animation: pulse 1.5s infinite;
+            animation: light-blink 1.5s infinite;
         }
 
-        @keyframes pulse {
+        @keyframes light-blink {
             0% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.3); opacity: 0.5; }
             100% { transform: scale(1); opacity: 1; }
@@ -137,7 +131,6 @@
             letter-spacing: 1px;
         }
 
-        /* 아이콘 그리드 */
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -170,7 +163,7 @@
 
         @media (max-width: 700px) {
             .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
-            .brand-title { font-size: 32px; letter-spacing: 4px; }
+            .brand-title { font-size: 30px; letter-spacing: 4px; }
             .hero-section { padding: 40px 0 40px 0; }
         }
     </style>
@@ -179,14 +172,11 @@
 
     <div class="hero-section">
         <img src="https://i.imgur.com/9VUt3sN.png" alt="Gold Wave Logo" class="premium-logo">
-        
         <h1 class="brand-title">GOLD WAVE</h1>
-        
         <div class="slogan">STAY AHEAD, RIGHT HERE.</div>
     </div>
 
     <div class="content-container">
-        
         <div class="status-badge">
             <div class="status-dot"></div>
             <span style="color: #bf953f; font-size: 12px; font-weight: 900; letter-spacing: 1px;">SYSTEM STATUS: ACTIVE</span>
@@ -199,35 +189,21 @@
         </div>
 
         <div class="dashboard-grid">
-            <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/guide.html'">
-                <img src="https://i.imgur.com/C5xMVYm.png" alt="설명서">
-            </div>
-            <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/profit.html'">
-                <img src="https://i.imgur.com/EHzDZon.png" alt="수익현황">
-            </div>
-            <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/archive.html'">
-                <img src="https://i.imgur.com/TKsOsPT.png" alt="아카이브">
-            </div>
-            <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/program.html'">
-                <img src="https://i.imgur.com/Xles7rX.png" alt="프로그램">
-            </div>
-            <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/faq.html'">
-                <img src="https://i.imgur.com/XCVCrRj.png" alt="FAQ">
-            </div>
-            <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/remote.html'">
-                <img src="https://i.imgur.com/CYBeRLN.png" alt="원격지원">
-            </div>
+            <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/guide.html'"><img src="https://i.imgur.com/C5xMVYm.png"></div>
+            <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/profit.html'"><img src="https://i.imgur.com/EHzDZon.png"></div>
+            <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/archive.html'"><img src="https://i.imgur.com/TKsOsPT.png"></div>
+            <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/program.html'"><img src="https://i.imgur.com/Xles7rX.png"></div>
+            <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/faq.html'"><img src="https://i.imgur.com/XCVCrRj.png"></div>
+            <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/remote.html'"><img src="https://i.imgur.com/CYBeRLN.png"></div>
         </div>
     </div>
 
     <script>
-        // 오늘 날짜 자동 갱신
         const today = new Date();
         const y = today.getFullYear();
         const m = String(today.getMonth() + 1).padStart(2, '0');
         const d = String(today.getDate()).padStart(2, '0');
         document.getElementById('date-display').innerText = `📅 ${y}.${m}.${d}`;
     </script>
-
 </body>
 </html>
