@@ -13,7 +13,7 @@
     
     .container { width: 95%; max-width: 1350px; }
 
-    /* [1. 칼각 정렬] 이미지 높이에 우측 박스들을 100% 일치 (위아래 꽉 채우기) */
+    /* 이미지와 우측 박스 높이 100% 일치 */
     .main-section { 
       display: flex; gap: 40px; align-items: stretch; margin-bottom: 60px;
     }
@@ -24,7 +24,6 @@
       object-fit: cover; box-shadow: 0 30px 60px rgba(0,0,0,0.6);
     }
 
-    /* [2. 박스 나누기] 위아래 박스가 여백 없이 이미지 라인에 딱 맞도록 설정 */
     .text-area { flex: 1.2; display: flex; flex-direction: column; gap: 20px; }
     
     .briefing-part { 
@@ -32,16 +31,24 @@
       border: 1px solid rgba(191,149,63,0.1); display: flex; flex-direction: column; justify-content: center;
     }
     
+    /* [수정] VVIP 전략 가이드 박스: Breathing Light 애니메이션 적용 */
     .vvip-strategy-box { 
       flex: 1; background: #161a21; padding: 40px; border-radius: 20px; 
       border: 1px solid rgba(191,149,63,0.3); border-left: 6px solid #bf953f; 
       display: flex; flex-direction: column; justify-content: center;
+      animation: breathingLight 2.5s infinite ease-in-out;
     }
 
-    .briefing-part h1 { color: #bf953f; font-size: 26px; margin: 0 0 20px 0; border-left: 6px solid #bf953f; padding-left: 15px; }
-    .vvip-title { color: #bf953f; font-weight: 800; font-size: 18px; margin-bottom: 15px; }
+    /* [수정] 제목 크기 동일화 (24px) */
+    .briefing-part h1, .vvip-title { 
+      color: #bf953f; font-size: 24px; margin: 0 0 20px 0; font-weight: 800;
+    }
+    .briefing-part h1 { border-left: 6px solid #bf953f; padding-left: 15px; }
 
-    /* [3. 볼드 + 형광펜 포인트] Neon Green 강조 */
+    /* [수정] 가이드 목록 행간 확장 (2.3) */
+    .vvip-list { padding-left: 20px; margin: 0; font-size: 16px; color: #bbb; line-height: 2.3; }
+    .vvip-list li { margin-bottom: 12px; }
+
     .point-focus { 
       font-weight: 800; color: #ffffff;
       background: linear-gradient(to top, rgba(0, 255, 0, 0.45) 45%, transparent 45%);
@@ -49,11 +56,15 @@
     }
     .neon-text { color: #00ff00; font-weight: 700; }
 
-    /* [4. 스크롤 유도 vvv 애니메이션] */
     .scroll-indicator { text-align: center; margin-bottom: 40px; color: #bf953f; animation: blink 1.2s infinite; font-size: 22px; font-weight: 900; }
     @keyframes blink { 0%, 100% { opacity: 0; transform: translateY(-5px); } 50% { opacity: 1; transform: translateY(5px); } }
 
-    /* [5. 하단 전략 섹션] 단락 분리 및 볼록한 입체 카드 */
+    /* ★ Breathing Light 애니메이션 정의 ★ */
+    @keyframes breathingLight {
+      0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 0, 0.05); border-color: rgba(191,149,63,0.2); }
+      50% { box-shadow: 0 0 25px rgba(0, 255, 0, 0.25); border-color: rgba(0, 255, 0, 0.4); }
+    }
+
     .logic-section { 
       width: 100%; background: #1a1e26; padding: 60px; border-radius: 25px; 
       border-top: 5px solid #bf953f; box-sizing: border-box; text-align: left;
@@ -61,14 +72,14 @@
     .logic-title { font-size: 24px; font-weight: 800; color: #fcf6ba; margin-bottom: 40px; border-bottom: 1px solid rgba(191,149,63,0.1); padding-bottom: 20px; }
     .logic-paragraph { margin-bottom: 40px; line-height: 2.3; font-size: 18px; color: #e5e5e5; }
 
-    /* [6. 볼록하게 튀어나온 입체 박스 포인트] */
+    /* [수정] 볼록 포인트 박스: Breathing Light 애니메이션 동일 적용 */
     .pop-card {
-      background: #1e232d; padding: 30px; border-radius: 15px;
-      box-shadow: inset 1px 1px 1px rgba(255,255,255,0.05), 8px 8px 20px rgba(0,0,0,0.5);
+      background: #1e232d; padding: 35px; border-radius: 15px;
+      box-shadow: inset 1px 1px 1px rgba(255,255,255,0.05), 8px 8px 25px rgba(0,0,0,0.5);
       border-top: 1px solid rgba(191,149,63,0.2); margin-top: 20px;
+      animation: breathingLight 2.5s infinite ease-in-out;
     }
 
-    /* [7. 아카이브: PREVIOUS REPORT 타이틀 & 두근 애니메이션] */
     .archive-title-label { 
       text-align: center; color: rgba(255,255,255,0.2); letter-spacing: 8px; 
       font-size: 14px; font-weight: 700; margin: 100px 0 30px 0;
@@ -79,17 +90,13 @@
       background: rgba(255,255,255,0.03); padding: 25px; border-radius: 15px; 
       border: 1px solid rgba(255,255,255,0.05); text-align: center; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    /* 두근(Heartbeat) 애니메이션 마우스 오버 */
     .archive-card:hover { 
       transform: scale(1.05); border-color: #bf953f; background: rgba(191,149,63,0.05);
       box-shadow: 0 0 20px rgba(0, 255, 0, 0.2); animation: heartbeat 0.8s infinite;
     }
     @keyframes heartbeat {
-      0% { transform: scale(1.05); }
-      15% { transform: scale(1.08); }
-      30% { transform: scale(1.05); }
-      45% { transform: scale(1.08); }
-      100% { transform: scale(1.05); }
+      0%, 30%, 100% { transform: scale(1.05); }
+      15%, 45% { transform: scale(1.08); }
     }
 
     .insight-bar { background: linear-gradient(90deg, rgba(191, 149, 63, 0.2), rgba(191, 149, 63, 0.05)); padding: 30px; border-radius: 15px; border-left: 6px solid #00ff00; text-align: left; font-weight: 700; font-size: 20px; margin-top: 40px; }
@@ -116,7 +123,7 @@
       
       <div class="vvip-strategy-box">
         <div class="vvip-title">💡 골드웨이브 VVIP 전략 가이드 (4/6)</div>
-        <ul style="padding-left:20px; margin:0; font-size:16px; color:#bbb; line-height:1.9;">
+        <ul class="vvip-list">
           <li><span class="neon-text">핵심 지표 사수:</span> 200일 EMA 안착 여부 최우선 모니터링</li>
           <li><span class="neon-text">자금 흐름 포착:</span> 안전자산 수급 변화 집중 주시</li>
           <li><span class="neon-text">데드라인 체크:</span> 기계적 대응만이 자산을 보호합니다</li>
@@ -141,7 +148,7 @@
     </div>
 
     <div class="pop-card">
-      <div style="font-size: 18px; line-height: 2.1; color: #fff;">
+      <div style="font-size: 19px; line-height: 2.2; color: #fff;">
         GOLDWAVE는 시장 변동성에 맞춰 진입 기준을 정밀하게 조정하고 있으며, <br>
         <span class="neon-text">확률이 높은 구간에서만 제한적으로 진입</span>하여 리스크를 최소화하는 안정적인 전략을 유지하고 있습니다.
       </div>
