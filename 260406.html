@@ -13,7 +13,7 @@
     
     .container { width: 95%; max-width: 1350px; }
 
-    /* 메인 섹션: 이미지와 우측 2단 박스 칼각 정렬 */
+    /* 메인 섹션 */
     .main-section { display: flex; gap: 40px; align-items: stretch; margin-bottom: 60px; }
     .img-area { flex: 1; min-width: 550px; }
     .img-area img { width: 100%; height: 100%; border-radius: 20px; border: 1px solid #bf953f; object-fit: cover; box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
@@ -21,7 +21,6 @@
     .text-area { flex: 1.2; display: flex; flex-direction: column; gap: 20px; }
     .briefing-part { flex: 1; background: rgba(255,255,255,0.02); padding: 40px; border-radius: 20px; border: 1px solid rgba(191,149,63,0.1); display: flex; flex-direction: column; justify-content: center; }
     
-    /* VVIP 전략 가이드: 황금빛 숨결 애니메이션 */
     .vvip-strategy-box { 
       flex: 1; background: #161a21; padding: 40px; border-radius: 20px; 
       border: 1px solid rgba(191,149,63,0.4); border-left: 6px solid #bf953f; 
@@ -53,13 +52,10 @@
       animation: goldenBreathing 1.8s infinite ease-in-out;
     }
 
-    /* [정적 카운팅 바] 4/2 뉴스 스타일 계승 */
-    .counter-bar {
-      width: 100%; padding: 40px 0; text-align: center; margin-top: 60px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .counter-text { font-size: 11px; color: #444; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
-    .counter-value { color: #bf953f; font-weight: 900; margin-left: 8px; opacity: 0.7; }
+    /* [긴급 수정] 4/2 코드의 여백과 색상을 그대로 가져옴 */
+    .footer-counter { margin-top: 60px; text-align: center; padding-bottom: 50px; }
+    .counter-label { font-size: 11px; color: #1c2128; letter-spacing: 1px; }
+    #busuanzi_value_page_pv { margin-left: 5px; opacity: 0.5; color: #bf953f; font-weight: bold; }
 
     .archive-title-label { text-align: center; color: rgba(255,255,255,0.2); letter-spacing: 8px; font-size: 14px; font-weight: 700; margin-bottom: 30px; }
     .archive-section { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
@@ -115,16 +111,16 @@
 
   <div class="insight-bar">✔ 시장은 요동쳐도 전략은 흔들리지 않습니다. 이것이 골드웨이브의 차이입니다.</div>
 
-  <div class="counter-bar">
-    <span class="counter-text">
+  <div class="footer-counter">
+    <span class="counter-label">
       TODAY VIEWS : 
-      <span id="busuanzi_value_page_pv" class="counter-value">0</span>
+      <span id="busuanzi_value_page_pv">0</span>
     </span>
   </div>
 
   <div class="archive-title-label">PREVIOUS REPORT</div>
   <div class="archive-section">
-    <div class="archive-card"><span style="font-size:12px; color:#666; display:block; margin-bottom:10px;">2026.04.05</span><b style="font-size:15px; color:#aaa;">비트코인 지지선 이탈 대응</b></div>
+    <div class="archive-card"><span style="font-size:12px; color:#666; display:block; margin-bottom:10px;">2026.04.05</span><b style="font-size:14px; color:#aaa;">비트코인 지지선 이탈 대응</b></div>
     <div class="archive-card"><span style="font-size:12px; color:#666; display:block; margin-bottom:10px;">2026.04.04</span><b style="font-size:15px; color:#aaa;">금/은 안전자산 수급 분석</b></div>
     <div class="archive-card"><span style="font-size:12px; color:#666; display:block; margin-bottom:10px;">2026.04.03</span><b style="font-size:15px; color:#aaa;">주간 변동성 요약 리포트</b></div>
   </div>
