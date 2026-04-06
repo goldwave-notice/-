@@ -8,13 +8,12 @@
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         body { margin: 0; padding: 0; background-color: #0b0d11; font-family: 'Pretendard', sans-serif; color: #e0e0e0; line-height: 1.7; }
         
-        /* 고정 상단바 */
         .header-sticky { position: fixed; top: 0; width: 100%; background: rgba(26, 29, 35, 0.95); border-bottom: 1px solid rgba(191, 149, 63, 0.3); z-index: 1000; padding: 12px 0; text-align: center; backdrop-filter: blur(10px); }
         .progress-title { font-size: 13px; font-weight: 800; color: #bf953f; margin-bottom: 8px; }
         .progress-container { width: 75%; background: #333; height: 6px; border-radius: 3px; margin: 0 auto; overflow: hidden; }
         .progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #bf953f, #fcf6ba); transition: width 0.3s; }
         
-        /* 🆕 상단 탭 메뉴 */
+        /* 상단 탭 메뉴 */
         .tab-menu { display: flex; justify-content: center; gap: 10px; margin: 120px auto 0; width: 92%; max-width: 600px; }
         .tab-btn { flex: 1; padding: 15px 0; background: rgba(255,255,255,0.05); border: 1px solid rgba(191,149,63,0.3); border-radius: 12px; color: #888; font-weight: 700; text-decoration: none; text-align: center; font-size: 14px; transition: 0.3s; cursor: pointer; }
         .tab-btn.active { background: #bf953f; color: #000; border-color: #bf953f; }
@@ -49,7 +48,7 @@
 
     <div class="tab-menu">
         <div class="tab-btn active" id="tab1" onclick="showTab('contract')">전자계약 방법</div>
-        <div class="tab-btn" id="tab2" onclick="showTab('program')">프로그램 사용설명</div>
+        <div class="tab-btn" id="tab2" onclick="showTab('program')">프로그램 설치 방법</div>
     </div>
 
     <div class="container">
@@ -60,35 +59,30 @@
                 <h1>GOLD WAVE GUIDE</h1>
                 <p class="sub-title">모두싸인 계약서 작성 방법</p>
             </div>
-
             <div class="guide-card">
                 <span class="step-tag">STEP 01</span>
                 <h2>카카오톡/이메일 확인</h2>
                 <div class="img-box"><img src="https://i.imgur.com/ovUnm9P.png" alt="Step 1"></div>
                 <div class="instruction">수신된 카카오톡 혹은 이메일을 확인하고 <span>[내용 확인 및 서명하기]</span>를 눌러 시작해 주세요.</div>
             </div>
-
             <div class="guide-card">
                 <span class="step-tag">STEP 02</span>
                 <h2>본인 인증 및 정보 입력</h2>
                 <div class="img-box"><img src="https://i.imgur.com/OYH5ice.png" alt="Step 2"></div>
                 <div class="instruction">안전한 계약을 위한 본인 인증 후, <span>안내에 따라 계약서의 빈칸을 빠짐없이 작성해 주세요.</span></div>
             </div>
-
             <div class="guide-card">
                 <span class="step-tag">STEP 03</span>
                 <h2>서명 방식 선택 (사인)</h2>
                 <div class="img-box"><img src="https://i.imgur.com/BDjrYfV.png" alt="Step 3"></div>
                 <div class="instruction">사인이나 도장 중 편하신 방식을 선택하세요. 사인의 경우 <span>직접 그리거나 이름을 입력하여 생성</span> 가능합니다.</div>
             </div>
-
             <div class="guide-card">
                 <span class="step-tag">STEP 04</span>
                 <h2>서명 방식 선택 (도장)</h2>
                 <div class="img-box"><img src="https://i.imgur.com/CZX8PE4.png" alt="Step 4"></div>
                 <div class="instruction">개인의 경우 '일반도장'을 선택하여 <span>이름 입력만으로 도장을 생성하거나 도장 사진을 업로드</span>할 수 있습니다.</div>
             </div>
-
             <div class="guide-card">
                 <span class="step-tag">STEP 05</span>
                 <h2>최종 동의 및 서명 완료</h2>
@@ -105,7 +99,7 @@
             </div>
             <div class="guide-card">
                 <span class="step-tag">VIDEO</span>
-                <h2>프로그램 사용 영상 가이드</h2>
+                <h2>프로그램 설치 영상 가이드</h2>
                 <div class="img-box">
                     <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://www.youtube.com/embed/영상주소" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allowfullscreen></iframe></div>
                 </div>
@@ -135,7 +129,10 @@
         }
         
         window.onload = function() {
-            if(window.location.hash === '#program') { showTab('program'); }
+            // URL 뒤에 #program이 있으면 자동으로 프로그램 탭을 보여줍니다.
+            if(window.location.hash === '#program') { 
+                showTab('program'); 
+            }
         };
 
         window.onscroll = function() {
