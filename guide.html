@@ -8,113 +8,108 @@
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         body { margin: 0; padding: 0; background-color: #0b0d11; font-family: 'Pretendard', sans-serif; color: #e0e0e0; line-height: 1.7; }
         
-        /* 고정 상단바 (진행률 표시) */
+        /* 고정 상단바 */
         .header-sticky { position: fixed; top: 0; width: 100%; background: rgba(26, 29, 35, 0.95); border-bottom: 1px solid rgba(191, 149, 63, 0.3); z-index: 1000; padding: 12px 0; text-align: center; backdrop-filter: blur(10px); }
         .progress-title { font-size: 13px; font-weight: 800; color: #bf953f; margin-bottom: 8px; }
         .progress-container { width: 75%; background: #333; height: 6px; border-radius: 3px; margin: 0 auto; overflow: hidden; }
         .progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #bf953f, #fcf6ba); transition: width 0.3s; }
         
-        .container { width: 92%; max-width: 600px; margin: 130px auto 160px; }
-        
-        /* 로고 영역 */
+        /* 🆕 상단 탭 메뉴 */
+        .tab-menu { display: flex; justify-content: center; gap: 10px; margin: 120px auto 0; width: 92%; max-width: 600px; }
+        .tab-btn { flex: 1; padding: 15px 0; background: rgba(255,255,255,0.05); border: 1px solid rgba(191,149,63,0.3); border-radius: 12px; color: #888; font-weight: 700; text-decoration: none; text-align: center; font-size: 14px; transition: 0.3s; cursor: pointer; }
+        .tab-btn.active { background: #bf953f; color: #000; border-color: #bf953f; }
+
+        .container { width: 92%; max-width: 600px; margin: 40px auto 160px; }
         .brand-section { text-align: center; margin-bottom: 50px; }
         .brand-logo { width: 55px; margin-bottom: 15px; filter: drop-shadow(0 0 8px rgba(191, 149, 63, 0.5)); }
         h1 { color: #bf953f; font-size: 26px; font-weight: 800; margin: 0; letter-spacing: -0.5px; }
         .sub-title { color: #aaa; font-size: 15px; margin-top: 8px; font-weight: 700; }
 
-        /* 단계별 카드 스타일 */
-        .guide-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(191, 149, 63, 0.15); border-radius: 24px; padding: 30px; margin-bottom: 70px; box-shadow: 0 15px 45px rgba(0,0,0,0.4); transition: 0.3s; }
+        .guide-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(191, 149, 63, 0.15); border-radius: 24px; padding: 30px; margin-bottom: 70px; box-shadow: 0 15px 45px rgba(0,0,0,0.4); }
         .step-tag { display: inline-block; background: #bf953f; color: #000; padding: 5px 18px; border-radius: 50px; font-weight: 900; font-size: 12px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(191, 149, 63, 0.3); }
-        .guide-card h2 { font-size: 21px; color: #fff; margin-bottom: 18px; font-weight: 800; letter-spacing: -0.03em; }
+        .guide-card h2 { font-size: 21px; color: #fff; margin-bottom: 18px; font-weight: 800; }
         
-        /* 이미지 영역 */
         .img-box { width: 100%; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: #000; margin-bottom: 25px; box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
-        .img-box img { width: 100%; display: block; }
+        .img-box img, .img-box iframe { width: 100%; display: block; }
         
-        /* ⭐ 랑랑 요청 문구 적용 영역 ⭐ */
         .instruction { background: rgba(191, 149, 63, 0.08); padding: 18px 20px; border-left: 5px solid #bf953f; border-radius: 8px; font-size: 16px; font-weight: 700; color: #fcf6ba; word-break: keep-all; line-height: 1.6; }
         .instruction span { color: #ffffff; text-decoration: underline; text-underline-offset: 4px; }
 
-        /* 하단 홈 버튼 */
-        .back-home { position: fixed; bottom: 35px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #bf953f, #aa771c); color: #000; padding: 16px 55px; border-radius: 50px; text-decoration: none; font-weight: 900; font-size: 16px; box-shadow: 0 12px 35px rgba(0,0,0,0.6); z-index: 1000; transition: transform 0.2s; }
-        .back-home:active { transform: translateX(-50%) scale(0.95); }
+        .back-home { position: fixed; bottom: 35px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #bf953f, #aa771c); color: #000; padding: 14px 50px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 16px; box-shadow: 0 12px 35px rgba(0,0,0,0.6); z-index: 1000; display: flex; align-items: center; gap: 8px; }
 
-        @media (max-width: 600px) { 
-            h1 { font-size: 22px; } 
-            .guide-card { padding: 20px; margin-bottom: 50px; }
-            .instruction { font-size: 15px; }
-            .back-home { padding: 14px 45px; width: 60%; text-align: center; }
-        }
+        @media (max-width: 600px) { h1 { font-size: 22px; } .guide-card { padding: 20px; margin-bottom: 50px; } }
     </style>
 </head>
 <body>
 
     <div class="header-sticky">
-        <div class="progress-title">계약서 작성 가이드 진행률</div>
-        <div class="progress-container">
-            <div id="p-bar" class="progress-bar"></div>
-        </div>
+        <div class="progress-title">GOLD WAVE 이용 가이드</div>
+        <div class="progress-container"><div id="p-bar" class="progress-bar"></div></div>
+    </div>
+
+    <div class="tab-menu">
+        <div class="tab-btn active" id="tab1" onclick="showTab('contract')">전자계약 방법</div>
+        <div class="tab-btn" id="tab2" onclick="showTab('program')">프로그램 사용설명</div>
     </div>
 
     <div class="container">
-        <div class="brand-section">
-            <img src="https://i.imgur.com/9VUt3sN.png" alt="Logo" class="brand-logo">
-            <h1>GOLD WAVE GUIDE</h1>
-            <p class="sub-title">모두싸인 계약서 작성 방법</p>
-        </div>
+        
+        <div id="contract-section">
+            <div class="brand-section">
+                <img src="https://i.imgur.com/9VUt3sN.png" alt="Logo" class="brand-logo">
+                <h1>GOLD WAVE GUIDE</h1>
+                <p class="sub-title">모두싸인 계약서 작성 방법</p>
+            </div>
 
-        <div class="guide-card">
-            <span class="step-tag">STEP 01</span>
-            <h2>카카오톡/이메일 확인</h2>
-            <div class="img-box">
-                <img src="https://i.imgur.com/ovUnm9P.png" alt="Step 1">
+            <div class="guide-card">
+                <span class="step-tag">STEP 01</span>
+                <h2>카카오톡/이메일 확인</h2>
+                <div class="img-box"><img src="https://i.imgur.com/ovUnm9P.png" alt="Step 1"></div>
+                <div class="instruction">수신된 카카오톡 혹은 이메일을 확인하고 <span>[내용 확인 및 서명하기]</span>를 눌러 시작해 주세요.</div>
             </div>
-            <div class="instruction">
-                수신된 카카오톡 혹은 이메일을 확인하고 <span>[내용 확인 및 서명하기]</span>를 눌러 시작해 주세요.
-            </div>
-        </div>
 
-        <div class="guide-card">
-            <span class="step-tag">STEP 02</span>
-            <h2>본인 인증 및 정보 입력</h2>
-            <div class="img-box">
-                <img src="https://i.imgur.com/OYH5ice.png" alt="Step 2">
+            <div class="guide-card">
+                <span class="step-tag">STEP 02</span>
+                <h2>본인 인증 및 정보 입력</h2>
+                <div class="img-box"><img src="https://i.imgur.com/OYH5ice.png" alt="Step 2"></div>
+                <div class="instruction">안전한 계약을 위한 본인 인증 후, <span>안내에 따라 계약서의 빈칸을 빠짐없이 작성해 주세요.</span></div>
             </div>
-            <div class="instruction">
-                안전한 계약을 위한 본인 인증 후, <span>안내에 따라 계약서의 빈칸을 빠짐없이 작성해 주세요.</span>
-            </div>
-        </div>
 
-        <div class="guide-card">
-            <span class="step-tag">STEP 03</span>
-            <h2>서명 방식 선택 (사인)</h2>
-            <div class="img-box">
-                <img src="https://i.imgur.com/BDjrYfV.png" alt="Step 3">
+            <div class="guide-card">
+                <span class="step-tag">STEP 03</span>
+                <h2>서명 방식 선택 (사인)</h2>
+                <div class="img-box"><img src="https://i.imgur.com/BDjrYfV.png" alt="Step 3"></div>
+                <div class="instruction">사인이나 도장 중 편하신 방식을 선택하세요. 사인의 경우 <span>직접 그리거나 이름을 입력하여 생성</span> 가능합니다.</div>
             </div>
-            <div class="instruction">
-                사인이나 도장 중 편하신 방식을 선택하세요. 사인의 경우 <span>직접 그리거나 이름을 입력하여 생성</span> 가능합니다.
-            </div>
-        </div>
 
-        <div class="guide-card">
-            <span class="step-tag">STEP 04</span>
-            <h2>서명 방식 선택 (도장)</h2>
-            <div class="img-box">
-                <img src="https://i.imgur.com/CZX8PE4.png" alt="Step 4">
+            <div class="guide-card">
+                <span class="step-tag">STEP 04</span>
+                <h2>서명 방식 선택 (도장)</h2>
+                <div class="img-box"><img src="https://i.imgur.com/CZX8PE4.png" alt="Step 4"></div>
+                <div class="instruction">개인의 경우 '일반도장'을 선택하여 <span>이름 입력만으로 도장을 생성하거나 도장 사진을 업로드</span>할 수 있습니다.</div>
             </div>
-            <div class="instruction">
-                개인의 경우 '일반도장'을 선택하여 <span>이름 입력만으로 도장을 생성하거나 도장 사진을 업로드</span>할 수 있습니다.
+
+            <div class="guide-card">
+                <span class="step-tag">STEP 05</span>
+                <h2>최종 동의 및 서명 완료</h2>
+                <div class="img-box"><img src="https://i.imgur.com/vsDzoxV.png" alt="Step 5"></div>
+                <div class="instruction">모든 공란을 채우셨다면 <span>[동의하고 서명 완료]</span>를 클릭하세요. 이제 모든 절차가 끝났습니다!</div>
             </div>
         </div>
 
-        <div class="guide-card">
-            <span class="step-tag">STEP 05</span>
-            <h2>최종 동의 및 서명 완료</h2>
-            <div class="img-box">
-                <img src="https://i.imgur.com/vsDzoxV.png" alt="Step 5">
+        <div id="program-section" style="display:none;">
+            <div class="brand-section">
+                <img src="https://i.imgur.com/9VUt3sN.png" alt="Logo" class="brand-logo">
+                <h1>PROGRAM GUIDE</h1>
+                <p class="sub-title">프로그램 설치 및 사용 안내</p>
             </div>
-            <div class="instruction">
-                모든 공란을 채우셨다면 <span>[동의하고 서명 완료]</span>를 클릭하세요. 이제 모든 절차가 끝났습니다!
+            <div class="guide-card">
+                <span class="step-tag">VIDEO</span>
+                <h2>프로그램 사용 영상 가이드</h2>
+                <div class="img-box">
+                    <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://www.youtube.com/embed/영상주소" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allowfullscreen></iframe></div>
+                </div>
+                <div class="instruction">영상을 시청하며 설정을 완료해 주세요. 궁금한 점은 <span>담당자에게 문의</span> 바랍니다.</div>
             </div>
         </div>
 
@@ -123,7 +118,26 @@
     <a href="https://goldwave-notice.github.io/-/dashboard.html" class="back-home">🏠 홈</a>
 
     <script>
-        // 스크롤에 따른 진행바 업데이트
+        function showTab(type) {
+            const contract = document.getElementById('contract-section');
+            const program = document.getElementById('program-section');
+            const tab1 = document.getElementById('tab1');
+            const tab2 = document.getElementById('tab2');
+
+            if(type === 'contract') {
+                contract.style.display = 'block'; program.style.display = 'none';
+                tab1.classList.add('active'); tab2.classList.remove('active');
+            } else {
+                contract.style.display = 'none'; program.style.display = 'block';
+                tab1.classList.remove('active'); tab2.classList.add('active');
+            }
+            window.scrollTo(0, 0);
+        }
+        
+        window.onload = function() {
+            if(window.location.hash === '#program') { showTab('program'); }
+        };
+
         window.onscroll = function() {
             var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -131,6 +145,5 @@
             document.getElementById("p-bar").style.width = scrolled + "%";
         };
     </script>
-
 </body>
 </html>
