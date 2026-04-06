@@ -3,39 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOLD WAVE - SMART STORY</title>
+    <title>GOLD WAVE - BRAND STORY</title>
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         body { margin: 0; padding: 0; background-color: #0b0d11; font-family: 'Pretendard', sans-serif; color: #e0e0e0; display: flex; flex-direction: column; align-items: center; padding-bottom: 150px; }
         
         .container { width: 92%; max-width: 900px; margin-top: 50px; position: relative; }
         
-        /* 상단 로고 + 제목 (유지) */
+        /* 상단 로고 + 제목 */
         .header-box { display: flex; align-items: center; border-left: 6px solid #bf953f; padding-left: 20px; margin-bottom: 50px; }
         .brand-logo { width: 45px; height: auto; margin-right: 18px; filter: drop-shadow(0 0 5px rgba(191, 149, 63, 0.5)); }
         .header-text h1 { color: #bf953f; font-size: 26px; margin: 0; font-weight: 800; }
         .header-text p { color: #ccc; font-size: 15px; margin-top: 7px; font-weight: 700; }
 
-        /* ⭐ 메인 영상: 얼굴 안 잘리게 높이 제한 해제 ⭐ */
-        .main-video-card { width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(191, 149, 63, 0.15); border-radius: 20px; padding: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.4); margin-bottom: 100px; }
-        .main-video-card h2 { font-size: 19px; color: #fff; margin-bottom: 20px; font-weight: 700; }
-        .video-box { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
-        video { width: 100%; display: block; } /* 원래 비율대로 시원하게! */
+        /* ⭐ 영상 카드 기본 스타일 ⭐ */
+        .main-video-card { 
+            width: 100%; background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(191, 149, 63, 0.15); border-radius: 20px; 
+            padding: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.4); 
+            margin-bottom: 80px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+            position: relative; overflow: hidden;
+        }
+        
+        /* ⭐ 랑랑 요청: 재생 중일 때 테두리가 빛나고 볼록해지는 효과 ⭐ */
+        .main-video-card.playing {
+            border: 2px solid #bf953f;
+            box-shadow: 0 0 30px rgba(191, 149, 63, 0.4), 0 20px 50px rgba(0,0,0,0.6);
+            transform: scale(1.02); /* 살짝 볼록하게 커짐 */
+            background: rgba(191, 149, 63, 0.05);
+        }
 
-        /* ⭐ 랑랑 요청: 우측 하단 미니 재생목록 (내비게이션용) ⭐ */
+        .main-video-card h2 { font-size: 19px; color: #fff; margin-bottom: 20px; font-weight: 700; transition: 0.3s; }
+        .main-video-card.playing h2 { color: #bf953f; } /* 재생 중엔 제목도 금색으로! */
+
+        .video-box { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        video { width: 100%; display: block; cursor: pointer; }
+
+        /* 우측 하단 미니 재생목록 아이콘 */
         .mini-playlist-btn { position: fixed; bottom: 100px; right: 30px; width: 140px; background: #1a1d23; border: 2px solid #bf953f; border-radius: 15px; padding: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); z-index: 2000; cursor: pointer; transition: 0.3s; }
         .mini-playlist-btn:hover { transform: scale(1.05); border-color: #ffcc00; }
         .mini-thumb { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 8px; margin-bottom: 8px; overflow: hidden; }
         .mini-thumb img { width: 100%; height: 100%; object-fit: cover; }
         .mini-text { font-size: 11px; font-weight: 800; color: #bf953f; text-align: center; }
 
-        /* ⭐ 랑랑 요청: 두 번째 영상 대본 (평소엔 숨김!) ⭐ */
-        #script-box { display: none; padding: 40px 20px; line-height: 1.8; color: #ccc; margin-top: 20px; background: rgba(191, 149, 63, 0.05); border-radius: 15px; border: 1px dashed rgba(191, 149, 63, 0.3); animation: fadeIn 0.8s; }
+        /* 두 번째 영상 대본 (재생 시 나타남) */
+        #script-box { display: none; padding: 40px 25px; line-height: 1.8; color: #ccc; margin-top: 25px; background: rgba(191, 149, 63, 0.08); border-radius: 15px; border: 1px dashed rgba(191, 149, 63, 0.4); animation: fadeIn 0.8s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        #script-box h3 { color: #bf953f; font-size: 20px; margin-top: 25px; margin-bottom: 12px; font-weight: 800; }
+        #script-box h3 { color: #bf953f; font-size: 20px; margin-bottom: 15px; font-weight: 800; }
         .highlight { color: #ffcc00; font-weight: 700; }
 
-        .back-home { position: fixed; bottom: 30px; left: 30px; background: linear-gradient(135deg, #bf953f, #aa771c); color: #000; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 900; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 1000; }
+        /* ⭐ 랑랑 요청: 한글로 변경된 대시보드 버튼 ⭐ */
+        .back-home { position: fixed; bottom: 30px; left: 30px; background: linear-gradient(135deg, #bf953f, #aa771c); color: #000; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 900; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 1000; transition: 0.2s; }
+        .back-home:active { transform: scale(0.95); }
 
         @media (max-width: 600px) { .mini-playlist-btn { width: 100px; right: 15px; } .header-text h1 { font-size: 20px; } }
     </style>
@@ -51,56 +70,61 @@
             </div>
         </div>
 
-        <div class="main-video-card">
+        <div id="card-1" class="main-video-card">
             <h2>PART 01. AI 시스템 투자 철학 : 리스크와 시스템</h2>
             <div class="video-box">
-                <video controls>
+                <video onplay="highlightCard('card-1')" onpause="removeHighlight('card-1')" controls>
                     <source src="https://goldwave-notice.github.io/-/1_보완.mp4" type="video/mp4">
                 </video>
             </div>
         </div>
 
-        <div id="second-section" class="main-video-card">
+        <div id="card-2" class="main-video-card">
             <h2>PART 02. GOLD WAVE : 브랜드 소개 영상</h2>
             <div class="video-box">
-                <video id="intro-video" controls>
+                <video id="intro-video" onplay="highlightCard('card-2'); showScript();" onpause="removeHighlight('card-2')" controls>
                     <source src="https://goldwave-notice.github.io/-/GOLDE WAVE MP4 VOICE.mp4" type="video/mp4">
                 </video>
             </div>
 
             <div id="script-box">
                 <h3>01. 왜 금(GOLD)인가?</h3>
-                <p>시장은 언제나 움직입니다. <span class="highlight">금과 은</span>은 가장 오래 살아남은 자산입니다. GOLD WAVE는 이 지속적인 가치를 기반으로 설계되었습니다.</p>
+                <p>시장은 언제나 움직이지만, 모든 움직임이 기회가 되는 것은 아닙니다.</p>
+                <p><span class="highlight">금과 은</span>은 가장 오래 살아남은 자산입니다. GOLD WAVE는 이 지속적인 가치를 기반으로 설계되었습니다.</p>
                 <h3>02. 전략적 특징</h3>
                 <p>독자적인 시그널 알고리즘으로 <span class="highlight">24시간 자동 매매</span>를 실현하며, 정교한 리스크 분산 구조를 갖추고 있습니다.</p>
                 <h3>03. 당신의 자산 위에 흐르는 황금 물결</h3>
-                <p>2026년, <span class="highlight">GOLD WAVE</span>와 함께 고객님의 자산 위에 <span class="highlight">황금 물결</span>이 흐를 순간입니다.</p>
+                <p>2026년, <span class="highlight">GOLD WAVE</span>와 함께 고객님의 자산 위에 황금 물결이 흐를 순간입니다.</p>
             </div>
         </div>
     </div>
 
-    <a href="https://goldwave-notice.github.io/-/dashboard.html" class="back-home">🏠 DASHBOARD</a>
+    <a href="https://goldwave-notice.github.io/-/dashboard.html" class="back-home">🏠 대시보드 돌아가기</a>
 
     <div class="mini-playlist-btn" onclick="scrollToSecond()">
         <div class="mini-thumb">
             <img src="https://i.imgur.com/9VUt3sN.png" alt="Next Video">
         </div>
-        <div class="mini-text">다음 영상 보러가기 ➔</div>
+        <div class="mini-text">소개 영상 보기 ➔</div>
     </div>
 
     <script>
-        // 1. 미니 아이콘 클릭 시 스크롤 이동
         function scrollToSecond() {
-            document.getElementById('second-section').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('card-2').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // 2. 두 번째 영상 재생 시 대본 보이기 마법!
-        const video = document.getElementById('intro-video');
-        const scriptBox = document.getElementById('script-box');
+        // ⭐ 빛나는 테두리 마법 스크립트 ⭐
+        function highlightCard(cardId) {
+            document.getElementById(cardId).classList.add('playing');
+        }
 
-        video.addEventListener('play', () => {
-            scriptBox.style.display = 'block'; // 재생하면 대본 짠!
-        });
+        function removeHighlight(cardId) {
+            document.getElementById(cardId).classList.remove('playing');
+        }
+
+        function showScript() {
+            document.getElementById('script-box').style.display = 'block';
+        }
     </script>
 
 </body>
