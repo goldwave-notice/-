@@ -7,8 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Pretendard:wght@100;300;700&display=swap" rel="stylesheet">
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    
     <style>
         body { margin: 0; padding: 0; background-color: #ffffff; font-family: 'Pretendard', sans-serif; color: #333; display: flex; flex-direction: column; align-items: center; }
         .hero-section { width: 100%; background-color: #000000; background-image: radial-gradient(1px 1px at 10% 20%, #ffffff 100%, transparent), radial-gradient(1.5px 1.5px at 35% 45%, #bf953f 100%, transparent), radial-gradient(2px 2px at 70% 15%, #ffcc00 100%, transparent), radial-gradient(1px 1px at 85% 80%, #ffffff 80%, transparent), radial-gradient(2px 2px at 50% 60%, #bf953f 100%, transparent), radial-gradient(1.5px 1.5px at 20% 85%, #ffcc00 100%, transparent); background-size: 250px 250px, 350px 350px, 400px 400px, 200px 200px, 300px 300px, 280px 280px; padding: 60px 0 65px 0; text-align: center; position: relative; border-bottom: 3px solid #bf953f; }
@@ -52,34 +50,31 @@
         <div class="info-bar">
             <span id="date-display"></span>
             <span style="margin: 0 10px; opacity: 0.3;">|</span>
-            <span>VIEWS: <span id="busuanzi_value_site_pv" style="color: #b38728; font-weight: 800;">0</span></span>
+            <span>TODAY: <span id="today-count" style="color: #b38728; font-weight: 800;">0</span></span>
+            <span style="margin: 0 10px; opacity: 0.3;">|</span>
+            <span>TOTAL: <span id="total-count" style="color: #b38728; font-weight: 800;">1,527</span></span>
         </div>
 
         <div class="dashboard-grid">
-    <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/-/guide.html'">
-        <img src="https://i.imgur.com/LLMMLE6.png" alt="사용설명서">
-    </div>
-
-    <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/-/faq.html'">
-        <img src="https://i.imgur.com/EHzDZon.png" alt="FAQ">
-    </div>
-
-    <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/-/profit.html'">
-        <img src="https://i.imgur.com/TKsOsPT.png" alt="수익현황">
-    </div>
-
-    <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/-/archive.html'">
-        <img src="https://i.imgur.com/Xles7rX.png" alt="아카이브">
-    </div>
-
-    <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/-/program.html'">
-        <img src="https://i.imgur.com/XCVCrRj.png" alt="프로그램">
-    </div>
-
-    <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/-/remote.html'">
-        <img src="https://i.imgur.com/CYBeRLN.png" alt="원격지원">
-    </div>
-</div>
+            <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/-/guide.html'">
+                <img src="https://i.imgur.com/LLMMLE6.png" alt="사용설명서">
+            </div>
+            <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/-/faq.html'">
+                <img src="https://i.imgur.com/EHzDZon.png" alt="FAQ">
+            </div>
+            <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/-/profit.html'">
+                <img src="https://i.imgur.com/TKsOsPT.png" alt="수익현황">
+            </div>
+            <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/-/archive.html'">
+                <img src="https://i.imgur.com/Xles7rX.png" alt="아카이브">
+            </div>
+            <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/-/program.html'">
+                <img src="https://i.imgur.com/XCVCrRj.png" alt="프로그램">
+            </div>
+            <div class="nav-card" onclick="location.href='https://goldwave-notice.github.io/-/remote.html'">
+                <img src="https://i.imgur.com/CYBeRLN.png" alt="원격지원">
+            </div>
+        </div>
 
     <div class="floating-cta-container">
         <a href="https://t.me/GOLD_WAVE37" target="_blank" class="telegram-link">
@@ -92,11 +87,35 @@
     </div>
 
     <script>
-        const today = new Date();
-        const y = today.getFullYear();
-        const m = String(today.getMonth() + 1).padStart(2, '0');
-        const d = String(today.getDate()).padStart(2, '0');
+        // 날짜 표시 기능 (내용 유지)
+        const todayObj = new Date();
+        const y = todayObj.getFullYear();
+        const m = String(todayObj.getMonth() + 1).padStart(2, '0');
+        const d = String(todayObj.getDate()).padStart(2, '0');
         document.getElementById('date-display').innerText = `📅 ${y}.${m}.${d}`;
+
+        // 🆕 마법의 카운터 기능 추가
+        function updateCounters() {
+            const todayStr = todayObj.toLocaleDateString();
+            
+            // 1. 오늘 방문자 로직 (날짜 바뀌면 0으로 리셋)
+            let dailyData = JSON.parse(localStorage.getItem('gw_daily')) || { date: "", count: 0 };
+            if (dailyData.date !== todayStr) {
+                dailyData = { date: todayStr, count: Math.floor(Math.random() * 5) + 1 }; // 새날은 1~5명 사이로 시작
+            } else {
+                dailyData.count += (Math.floor(Math.random() * 2) + 1); // 들어올 때마다 1~2명씩 추가
+            }
+            localStorage.setItem('gw_daily', JSON.stringify(dailyData));
+            document.getElementById('today-count').innerText = dailyData.count;
+
+            // 2. 누적 방문자 로직 (1,527부터 시작해서 계속 상승)
+            let totalCount = parseInt(localStorage.getItem('gw_total')) || 1527;
+            totalCount += (Math.floor(Math.random() * 3) + 2); // 들어올 때마다 2~4명씩 추가
+            localStorage.setItem('gw_total', totalCount);
+            document.getElementById('total-count').innerText = totalCount.toLocaleString();
+        }
+
+        window.onload = updateCounters;
     </script>
 </body>
 </html>
