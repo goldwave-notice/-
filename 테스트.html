@@ -13,10 +13,7 @@
     
     .container { width: 95%; max-width: 1350px; }
 
-    /* 이미지와 우측 박스 높이 100% 일치 */
-    .main-section { 
-      display: flex; gap: 40px; align-items: stretch; margin-bottom: 60px;
-    }
+    .main-section { display: flex; gap: 40px; align-items: stretch; margin-bottom: 60px; }
     
     .img-area { flex: 1; min-width: 550px; }
     .img-area img { 
@@ -31,21 +28,19 @@
       border: 1px solid rgba(191,149,63,0.1); display: flex; flex-direction: column; justify-content: center;
     }
     
-    /* [수정] VVIP 전략 가이드 박스: Breathing Light 애니메이션 적용 */
+    /* [강화] VVIP 전략 가이드 박스: 더 선명한 깜빡임 */
     .vvip-strategy-box { 
       flex: 1; background: #161a21; padding: 40px; border-radius: 20px; 
       border: 1px solid rgba(191,149,63,0.3); border-left: 6px solid #bf953f; 
       display: flex; flex-direction: column; justify-content: center;
-      animation: breathingLight 2.5s infinite ease-in-out;
+      animation: breathingLight 1.5s infinite ease-in-out; /* 속도 2.5s -> 1.5s로 단축 */
     }
 
-    /* [수정] 제목 크기 동일화 (24px) */
     .briefing-part h1, .vvip-title { 
       color: #bf953f; font-size: 24px; margin: 0 0 20px 0; font-weight: 800;
     }
     .briefing-part h1 { border-left: 6px solid #bf953f; padding-left: 15px; }
 
-    /* [수정] 가이드 목록 행간 확장 (2.3) */
     .vvip-list { padding-left: 20px; margin: 0; font-size: 16px; color: #bbb; line-height: 2.3; }
     .vvip-list li { margin-bottom: 12px; }
 
@@ -59,10 +54,10 @@
     .scroll-indicator { text-align: center; margin-bottom: 40px; color: #bf953f; animation: blink 1.2s infinite; font-size: 22px; font-weight: 900; }
     @keyframes blink { 0%, 100% { opacity: 0; transform: translateY(-5px); } 50% { opacity: 1; transform: translateY(5px); } }
 
-    /* ★ Breathing Light 애니메이션 정의 ★ */
+    /* [강화] Breathing Light: 빛의 범위와 명도를 높여 눈에 확 띄게 수정 */
     @keyframes breathingLight {
-      0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 0, 0.05); border-color: rgba(191,149,63,0.2); }
-      50% { box-shadow: 0 0 25px rgba(0, 255, 0, 0.25); border-color: rgba(0, 255, 0, 0.4); }
+      0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 0, 0.05); border-color: rgba(191,149,63,0.3); }
+      50% { box-shadow: 0 0 35px rgba(0, 255, 0, 0.5); border-color: rgba(0, 255, 0, 0.8); }
     }
 
     .logic-section { 
@@ -72,12 +67,12 @@
     .logic-title { font-size: 24px; font-weight: 800; color: #fcf6ba; margin-bottom: 40px; border-bottom: 1px solid rgba(191,149,63,0.1); padding-bottom: 20px; }
     .logic-paragraph { margin-bottom: 40px; line-height: 2.3; font-size: 18px; color: #e5e5e5; }
 
-    /* [수정] 볼록 포인트 박스: Breathing Light 애니메이션 동일 적용 */
+    /* [강화] 볼록 포인트 박스: 애니메이션 동일 적용 */
     .pop-card {
       background: #1e232d; padding: 35px; border-radius: 15px;
       box-shadow: inset 1px 1px 1px rgba(255,255,255,0.05), 8px 8px 25px rgba(0,0,0,0.5);
       border-top: 1px solid rgba(191,149,63,0.2); margin-top: 20px;
-      animation: breathingLight 2.5s infinite ease-in-out;
+      animation: breathingLight 1.5s infinite ease-in-out;
     }
 
     .archive-title-label { 
