@@ -13,10 +13,7 @@
     
     .container { width: 95%; max-width: 1350px; }
 
-    /* 메인 섹션: 이미지와 우측 2단 박스 칼각 정렬 */
-    .main-section { 
-      display: flex; gap: 40px; align-items: stretch; margin-bottom: 60px;
-    }
+    .main-section { display: flex; gap: 40px; align-items: stretch; margin-bottom: 60px; }
     
     .img-area { flex: 1; min-width: 550px; }
     .img-area img { 
@@ -31,7 +28,6 @@
       border: 1px solid rgba(191,149,63,0.1); display: flex; flex-direction: column; justify-content: center;
     }
     
-    /* VVIP 전략 가이드: 황금빛 숨결 애니메이션 */
     .vvip-strategy-box { 
       flex: 1; background: #161a21; padding: 40px; border-radius: 20px; 
       border: 1px solid rgba(191,149,63,0.4); border-left: 6px solid #bf953f; 
@@ -39,17 +35,14 @@
       animation: goldenBreathing 1.8s infinite ease-in-out;
     }
 
-    /* 제목 크기 동일화 */
     .briefing-part h1, .vvip-title { 
       color: #bf953f; font-size: 24px; margin: 0 0 20px 0; font-weight: 800;
     }
     .briefing-part h1 { border-left: 6px solid #bf953f; padding-left: 15px; }
 
-    /* 행간 확장 가이드 목록 */
     .vvip-list { padding-left: 20px; margin: 0; font-size: 16px; color: #bbb; line-height: 2.3; }
     .vvip-list li { margin-bottom: 12px; }
 
-    /* 볼드 + 형광펜 포인트 */
     .point-focus { 
       font-weight: 800; color: #ffffff;
       background: linear-gradient(to top, rgba(0, 255, 0, 0.45) 45%, transparent 45%);
@@ -57,13 +50,11 @@
     }
     .neon-text { color: #00ff00; font-weight: 700; }
 
-    /* 황금빛 숨결 애니메이션 */
     @keyframes goldenBreathing {
       0%, 100% { box-shadow: 0 0 15px rgba(191, 149, 63, 0.1); border-color: rgba(191, 149, 63, 0.4); }
       50% { box-shadow: 0 0 40px rgba(191, 149, 63, 0.5); border-color: rgba(252, 246, 186, 0.8); }
     }
 
-    /* 하단 전략 해석 섹션 */
     .logic-section { 
       width: 100%; background: #1a1e26; padding: 60px; border-radius: 25px; 
       border-top: 5px solid #bf953f; box-sizing: border-box; text-align: left;
@@ -71,7 +62,6 @@
     .logic-title { font-size: 24px; font-weight: 800; color: #fcf6ba; margin-bottom: 40px; border-bottom: 1px solid rgba(191,149,63,0.1); padding-bottom: 20px; }
     .logic-paragraph { margin-bottom: 40px; line-height: 2.3; font-size: 18px; color: #e5e5e5; }
 
-    /* 볼록 포인트 박스 + 황금빛 숨결 */
     .pop-card {
       background: #1e232d; padding: 35px; border-radius: 15px;
       box-shadow: inset 1px 1px 1px rgba(255,255,255,0.05), 8px 8px 25px rgba(0,0,0,0.5);
@@ -79,7 +69,7 @@
       animation: goldenBreathing 1.8s infinite ease-in-out;
     }
 
-    /* 카운팅 섹션 디자인 */
+    /* 카운팅 섹션 */
     .counter-bar {
       width: 100%; background: rgba(191, 149, 63, 0.05); padding: 25px 0; border-radius: 50px;
       margin: 80px 0 20px 0; display: flex; justify-content: center; align-items: center;
@@ -88,7 +78,6 @@
     .counter-item { font-size: 16px; font-weight: 700; color: #aaa; margin: 0 40px; text-transform: uppercase; letter-spacing: 1px; }
     .counter-number { color: #00ff00; font-size: 24px; font-weight: 900; margin-left: 12px; }
 
-    /* 아카이브 섹션 및 두근두근 애니메이션 */
     .archive-title-label { 
       text-align: center; color: rgba(255,255,255,0.2); letter-spacing: 8px; 
       font-size: 14px; font-weight: 700; margin-bottom: 30px;
@@ -163,9 +152,9 @@
   <div class="insight-bar">✔ 시장은 요동쳐도 전략은 흔들리지 않습니다. 이것이 골드웨이브의 차이입니다.</div>
 
   <div class="counter-bar">
-    <div class="counter-item">TODAY VIEW <span class="counter-number">1,248</span></div>
-    <div class="counter-item">DATA RELIABILITY <span class="counter-number">98.4%</span></div>
-    <div class="counter-item">ALGORITHM VERIFIED <span class="counter-number">24/24</span></div>
+    <div class="counter-item">TODAY VIEW <span class="counter-number count" data-target="1248">0</span></div>
+    <div class="counter-item">DATA RELIABILITY <span class="counter-number count" data-target="98.4">0</span>%</div>
+    <div class="counter-item">ALGORITHM VERIFIED <span class="counter-number count" data-target="24">0</span>/24</div>
   </div>
 
   <div class="archive-title-label">PREVIOUS REPORT</div>
@@ -175,6 +164,32 @@
     <div class="archive-card"><span style="font-size:12px; color:#666; display:block; margin-bottom:10px;">2026.04.03</span><b style="font-size:15px; color:#aaa;">주간 변동성 요약 리포트</b></div>
   </div>
 </div>
+
+<script>
+  const counters = document.querySelectorAll('.count');
+  const speed = 100;
+
+  counters.forEach(counter => {
+    const updateCount = () => {
+      const target = +counter.getAttribute('data-target');
+      const count = +counter.innerText;
+      const inc = target / speed;
+
+      if (count < target) {
+        // 정수와 실수를 구분해서 표시
+        if (target % 1 === 0) {
+          counter.innerText = Math.ceil(count + inc);
+        } else {
+          counter.innerText = (count + inc).toFixed(1);
+        }
+        setTimeout(updateCount, 20);
+      } else {
+        counter.innerText = target;
+      }
+    };
+    updateCount();
+  });
+</script>
 
 </body>
 </html>
