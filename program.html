@@ -6,61 +6,36 @@
     <title>GOLD WAVE - PROGRAM & LOGIC</title>
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-        body { margin: 0; padding: 0; background-color: #0b0d11; font-family: 'Pretendard', sans-serif; color: #e0e0e0; display: flex; flex-direction: column; align-items: center; padding-bottom: 150px; scroll-behavior: smooth; }
-        
+        body { margin: 0; padding: 0; background-color: #0b0d11; font-family: 'Pretendard', -apple-system, sans-serif; color: #e0e0e0; display: flex; flex-direction: column; align-items: center; padding-bottom: 150px; scroll-behavior: smooth; }
         .container { width: 92%; max-width: 900px; margin-top: 50px; position: relative; }
-        
-        /* 상단 헤더 */
         .header-box { display: flex; align-items: center; border-left: 6px solid #bf953f; padding-left: 20px; margin-bottom: 30px; }
-        .brand-logo { width: 45px; height: auto; margin-right: 18px; filter: drop-shadow(0 0 5px rgba(191, 149, 63, 0.5)); }
+        .brand-logo { width: 45px; height: auto; margin-right: 18px; }
         .header-text h1 { color: #bf953f; font-size: 26px; margin: 0; font-weight: 800; }
         .header-text p { color: #ccc; font-size: 15px; margin-top: 7px; font-weight: 700; }
-
-        /* 🆕 상단 퀵 메뉴 */
         .top-nav { display: flex; gap: 10px; margin-bottom: 50px; width: 100%; justify-content: flex-start; }
         .nav-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(191,149,63,0.3); color: #aaa; padding: 10px 20px; border-radius: 50px; cursor: pointer; font-weight: 700; font-size: 13px; transition: 0.3s; }
         .nav-btn:hover { background: rgba(191,149,63,0.1); color: #bf953f; }
-
-        /* 영상 카드 스타일 (기존 유지) */
-        .main-video-card { 
-            width: 100%; background: rgba(255, 255, 255, 0.03); 
-            border: 1px solid rgba(191, 149, 63, 0.15); border-radius: 20px; 
-            padding: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.4); 
-            margin-bottom: 60px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
-            position: relative; overflow: hidden; box-sizing: border-box;
-        }
+        .logic-section { margin-top: 20px; width: 100%; }
+        .logic-card { background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01)); border: 1px solid rgba(191, 149, 63, 0.2); border-radius: 25px; padding: 40px; margin-bottom: 30px; box-shadow: 10px 10px 30px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 20px; }
+        .logic-title { color: #bf953f; font-size: 22px; font-weight: 800; border-bottom: 1px solid rgba(191, 149, 63, 0.3); padding-bottom: 15px; }
+        .viz-container { width: 100%; height: 200px; background: rgba(0,0,0,0.4); border-radius: 15px; position: relative; overflow: hidden; border: 1px solid rgba(191,149,63,0.1); margin-bottom: 10px; }
+        .scan-bar { position: absolute; width: 2px; height: 100%; background: linear-gradient(to bottom, transparent, #bf953f, transparent); left: 0; animation: scanMove 3s ease-in-out infinite; box-shadow: 0 0 15px #bf953f; }
+        @keyframes scanMove { 0% { left: 0%; } 100% { left: 100%; } }
+        .logic-content { display: flex; gap: 30px; align-items: flex-start; }
+        .logic-img { width: 40%; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); }
+        .logic-text { flex: 1; line-height: 1.8; color: #ccc; font-size: 16px; }
+        .highlight { color: #ffcc00; font-weight: 700; }
+        .key-point-banner { background: rgba(191, 149, 63, 0.1); border-left: 4px solid #bf953f; padding: 15px; color: #ffcc00; font-weight: 800; font-style: italic; font-size: 15px; margin-top: 10px; }
+        .main-video-card { width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(191, 149, 63, 0.15); border-radius: 20px; padding: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.4); margin-bottom: 60px; transition: all 0.5s; position: relative; overflow: hidden; box-sizing: border-box; }
         .main-video-card.playing { border: 2px solid #bf953f; box-shadow: 0 0 30px rgba(191, 149, 63, 0.4); transform: scale(1.02); background: rgba(191, 149, 63, 0.05); }
         .main-video-card h2 { font-size: 19px; color: #fff; margin-bottom: 20px; font-weight: 700; }
         .video-box { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
         video { width: 100%; display: block; }
-
-        /* 🆕 로직 설명 카드 스타일 (볼록한 느낌 강조) */
-        .logic-section { margin-top: 20px; }
-        .logic-card { 
-            background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-            border: 1px solid rgba(191, 149, 63, 0.2); border-radius: 25px;
-            padding: 40px; margin-bottom: 30px;
-            box-shadow: 10px 10px 30px rgba(0,0,0,0.5), inset -5px -5px 15px rgba(255,255,255,0.02);
-            display: flex; flex-direction: column; gap: 20px;
-        }
-        .logic-title { color: #bf953f; font-size: 22px; font-weight: 800; border-bottom: 1px solid rgba(191, 149, 63, 0.3); padding-bottom: 15px; }
-        .logic-content { display: flex; gap: 30px; align-items: flex-start; }
-        .logic-img { width: 40%; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-        .logic-text { flex: 1; line-height: 1.8; color: #ccc; font-size: 16px; }
-        .highlight { color: #ffcc00; font-weight: 700; }
-
-        /* 버튼류 */
         .back-home { position: fixed; bottom: 30px; left: 30px; background: linear-gradient(135deg, #bf953f, #aa771c); color: #000; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 900; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 1000; }
-
-        @media (max-width: 768px) {
-            .logic-content { flex-direction: column; }
-            .logic-img { width: 100%; }
-            .top-nav { flex-wrap: wrap; }
-        }
+        @media (max-width: 768px) { .logic-content { flex-direction: column; } .logic-img { width: 100%; } }
     </style>
 </head>
 <body>
-
     <div class="container">
         <div class="header-box">
             <img src="https://i.imgur.com/9VUt3sN.png" alt="Logo" class="brand-logo">
@@ -69,70 +44,70 @@
                 <p>시스템의 가치와 기술적 로직을 경험하십시오</p>
             </div>
         </div>
-
         <div class="top-nav">
-            <button class="nav-btn" onclick="document.getElementById('card-1').scrollIntoView()">🎬 투자철학 영상</button>
-            <button class="nav-btn" onclick="document.getElementById('card-2').scrollIntoView()">🎬 브랜드 영상</button>
-            <button class="nav-btn" onclick="document.getElementById('logic-section').scrollIntoView()" style="border-color:#bf953f; color:#fff;">🧠 시스템 로직 설명</button>
+            <button class="nav-btn" onclick="document.getElementById('logic-section').scrollIntoView()" style="border-color:#bf953f; color:#fff;">시스템 로직 설명</button>
+            <button class="nav-btn" onclick="document.getElementById('brand-videos').scrollIntoView()">브랜드 영상 (PART 1&2)</button>
         </div>
-
-        <div id="card-1" class="main-video-card">
-            <h2>PART 01. AI 시스템 투자 철학 : 리스크와 시스템</h2>
-            <div class="video-box">
-                <video onplay="highlightCard('card-1')" onpause="removeHighlight('card-1')" controls>
-                    <source src="https://goldwave-notice.github.io/-/1_보완.mp4" type="video/mp4">
-                </video>
-            </div>
-        </div>
-
-        <div id="card-2" class="main-video-card">
-            <h2>PART 02. GOLD WAVE : 브랜드 소개 영상</h2>
-            <div class="video-box">
-                <video id="intro-video" onplay="highlightCard('card-2')" onpause="removeHighlight('card-2')" controls>
-                    <source src="https://goldwave-notice.github.io/-/GOLDE WAVE MP4 VOICE.mp4" type="video/mp4">
-                </video>
-            </div>
-        </div>
-
         <div id="logic-section" class="logic-section">
             <div class="header-box" style="border-left-color: #ffcc00; margin-bottom: 30px;">
                 <div class="header-text">
-                    <h1 style="color: #ffcc00;">PART 03. SYSTEM ALGORITHM LOGIC</h1>
+                    <h1 style="color: #ffcc00;">CORE ALGORITHM LOGIC</h1>
                     <p>GOLD WAVE가 시장을 분석하고 대응하는 핵심 논리</p>
                 </div>
             </div>
-
             <div class="logic-card">
-                <div class="logic-title">01. 시장 변동성 정밀 분석</div>
+                <div class="logic-title">1. 메인 로직 : 파동 기반 추세 대응</div>
+                <div class="viz-container">
+                    <div class="scan-bar"></div>
+                    <p style="position:absolute; bottom:10px; left:15px; font-size:10px; color:#bf953f; opacity:0.6;">ANALYZING MARKET STRUCTURE...</p>
+                </div>
                 <div class="logic-content">
-                    <img src="https://i.imgur.com/3QA8YxM.png" class="logic-img" alt="로직 이미지 1">
                     <div class="logic-text">
-                        단순한 가격 흐름이 아닌 <span class="highlight">시장 에너지의 응축과 폭발</span>을 추적합니다. 실시간으로 유입되는 골드/실버의 거래량을 분석하여 허수 신호를 걸러내고 가장 강력한 <span class="highlight">추세 진입 타점</span>을 선별합니다.
+                        <h3>시장 흐름 기반으로 <span class="highlight">확률 높은 구간만 진입</span></h3>
+                        구조 + 흐름 + 타점 결합 방식을 채택하여 불필요한 매매를 최소화하고 안정적인 수익 누적 구조를 만듭니다.
+                        <div class="key-point-banner">“시장 방향을 따라가는 구조 기반 핵심 전략”</div>
                     </div>
                 </div>
             </div>
-
             <div class="logic-card">
-                <div class="logic-title">02. 24시간 자동 헷징 리스크 관리</div>
+                <div class="logic-title">2. 24시간 자동 헷징 리스크 관리</div>
                 <div class="logic-content">
                     <div class="logic-text">
-                        수익보다 중요한 것은 <span class="highlight">원금의 보호</span>입니다. GOLD WAVE는 예상치 못한 급변동 발생 시 즉각적으로 반대 포지션을 고려하거나 진입 비중을 조절하는 <span class="highlight">자동 헷징 알고리즘</span>이 24시간 작동하여 리스크를 최소화합니다.
+                        수익보다 중요한 것은 <span class="highlight">원금 보호</span>입니다. 예상치 못한 변동 시 즉각적으로 반대 포지션을 고려하거나 비중을 조절하는 <span class="highlight">자동 헷징 알고리즘</span>이 작동합니다.
                     </div>
-                    <img src="https://i.imgur.com/vH9vVat.png" class="logic-img" alt="로직 이미지 2">
+                    <img src="https://i.imgur.com/vH9vVat.png" class="logic-img" alt="리스크 관리">
+                </div>
+            </div>
+        </div>
+        <div id="brand-videos">
+            <div class="header-box" style="margin-top: 40px; margin-bottom: 30px;">
+                <div class="header-text">
+                    <h1>GOLD WAVE BRAND STORY</h1>
+                    <p>AI가 설계한 황금빛 물결, 투자의 새로운 패러다임</p>
+                </div>
+            </div>
+            <div id="card-1" class="main-video-card">
+                <h2>PART 01. AI 시스템 투자 철학 : 리스크와 시스템</h2>
+                <div class="video-box">
+                    <video onplay="highlightCard('card-1')" onpause="removeHighlight('card-1')" controls>
+                        <source src="https://goldwave-notice.github.io/-/1_보완.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            <div id="card-2" class="main-video-card">
+                <h2>PART 02. GOLD WAVE : 브랜드 소개 영상</h2>
+                <div class="video-box">
+                    <video id="intro-video" onplay="highlightCard('card-2')" onpause="removeHighlight('card-2')" controls>
+                        <source src="https://goldwave-notice.github.io/-/GOLDE WAVE MP4 VOICE.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
         </div>
     </div>
-
     <a href="https://goldwave-notice.github.io/-/dashboard.html" class="back-home">🏠 홈</a>
-
     <script>
-        function highlightCard(cardId) {
-            document.getElementById(cardId).classList.add('playing');
-        }
-        function removeHighlight(cardId) {
-            document.getElementById(cardId).classList.remove('playing');
-        }
+        function highlightCard(cardId) { document.getElementById(cardId).classList.add('playing'); }
+        function removeHighlight(cardId) { document.getElementById(cardId).classList.remove('playing'); }
     </script>
 </body>
 </html>
