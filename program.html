@@ -3,111 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOLD WAVE - PROGRAM & LOGIC</title>
+    <title>GOLD WAVE - 핵심 알고리즘 로직</title>
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-        body { margin: 0; padding: 0; background-color: #0b0d11; font-family: 'Pretendard', -apple-system, sans-serif; color: #e0e0e0; display: flex; flex-direction: column; align-items: center; padding-bottom: 150px; scroll-behavior: smooth; }
-        .container { width: 92%; max-width: 900px; margin-top: 50px; position: relative; }
+        
+        body { margin: 0; padding: 0; background-color: #0b0d11; font-family: 'Pretendard', sans-serif; color: #e0e0e0; display: flex; flex-direction: column; align-items: center; padding-bottom: 100px; scroll-behavior: smooth; overflow-x: hidden; }
+        .container { width: 92%; max-width: 900px; margin-top: 50px; }
+
+        /* 상단 헤더 */
         .header-box { display: flex; align-items: center; border-left: 6px solid #bf953f; padding-left: 20px; margin-bottom: 30px; }
-        .brand-logo { width: 45px; height: auto; margin-right: 18px; }
-        .header-text h1 { color: #bf953f; font-size: 26px; margin: 0; font-weight: 800; }
-        .header-text p { color: #ccc; font-size: 15px; margin-top: 7px; font-weight: 700; }
-        .top-nav { display: flex; gap: 10px; margin-bottom: 50px; width: 100%; justify-content: flex-start; }
-        .nav-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(191,149,63,0.3); color: #aaa; padding: 10px 20px; border-radius: 50px; cursor: pointer; font-weight: 700; font-size: 13px; transition: 0.3s; }
-        .nav-btn:hover { background: rgba(191,149,63,0.1); color: #bf953f; }
-        .logic-section { margin-top: 20px; width: 100%; }
-        .logic-card { background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01)); border: 1px solid rgba(191, 149, 63, 0.2); border-radius: 25px; padding: 40px; margin-bottom: 30px; box-shadow: 10px 10px 30px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 20px; }
-        .logic-title { color: #bf953f; font-size: 22px; font-weight: 800; border-bottom: 1px solid rgba(191, 149, 63, 0.3); padding-bottom: 15px; }
-        .viz-container { width: 100%; height: 200px; background: rgba(0,0,0,0.4); border-radius: 15px; position: relative; overflow: hidden; border: 1px solid rgba(191,149,63,0.1); margin-bottom: 10px; }
-        .scan-bar { position: absolute; width: 2px; height: 100%; background: linear-gradient(to bottom, transparent, #bf953f, transparent); left: 0; animation: scanMove 3s ease-in-out infinite; box-shadow: 0 0 15px #bf953f; }
-        @keyframes scanMove { 0% { left: 0%; } 100% { left: 100%; } }
-        .logic-content { display: flex; gap: 30px; align-items: flex-start; }
-        .logic-img { width: 40%; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); }
-        .logic-text { flex: 1; line-height: 1.8; color: #ccc; font-size: 16px; }
-        .highlight { color: #ffcc00; font-weight: 700; }
-        .key-point-banner { background: rgba(191, 149, 63, 0.1); border-left: 4px solid #bf953f; padding: 15px; color: #ffcc00; font-weight: 800; font-style: italic; font-size: 15px; margin-top: 10px; }
-        .main-video-card { width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(191, 149, 63, 0.15); border-radius: 20px; padding: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.4); margin-bottom: 60px; transition: all 0.5s; position: relative; overflow: hidden; box-sizing: border-box; }
-        .main-video-card.playing { border: 2px solid #bf953f; box-shadow: 0 0 30px rgba(191, 149, 63, 0.4); transform: scale(1.02); background: rgba(191, 149, 63, 0.05); }
-        .main-video-card h2 { font-size: 19px; color: #fff; margin-bottom: 20px; font-weight: 700; }
-        .video-box { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
-        video { width: 100%; display: block; }
-        .back-home { position: fixed; bottom: 30px; left: 30px; background: linear-gradient(135deg, #bf953f, #aa771c); color: #000; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 900; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 1000; }
-        @media (max-width: 768px) { .logic-content { flex-direction: column; } .logic-img { width: 100%; } }
+        .brand-logo { width: 45px; height: auto; margin-right: 18px; filter: drop-shadow(0 0 5px rgba(191,149,63,0.5)); }
+        .header-text h1 { color: #bf953f; font-size: 24px; margin: 0; font-weight: 800; letter-spacing: -0.5px; }
+        .header-text p { color: #ccc; font-size: 14px; margin-top: 5px; font-weight: 600; }
+
+        /* 🆕 대시보드형 로직 탭 메뉴 */
+        .logic-tabs { display: flex; gap: 8px; margin-bottom: 25px; width: 100%; overflow-x: auto; padding-bottom: 10px; }
+        .logic-tabs::-webkit-scrollbar { height: 4px; }
+        .tab-btn { 
+            flex: 1; min-width: 100px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); 
+            color: #888; padding: 15px 10px; border-radius: 15px; cursor: pointer; font-weight: 700; font-size: 13px; 
+            transition: 0.3s; white-space: nowrap; display: flex; flex-direction: column; align-items: center; gap: 5px;
+        }
+        .tab-btn.active[data-target="logic-1"] { border-color: #bf953f; color: #bf953f; background: rgba(191,149,63,0.1); }
+        .tab-btn.active[data-target="logic-2"] { border-color: #c0c0c0; color: #c0c0c0; background: rgba(192,192,192,0.1); }
+        .tab-btn.active[data-target="logic-3"] { border-color: #ffffff; color: #ffffff; background: rgba(255,255,255,0.1); }
+
+        /* 로직 카드 영역 */
+        .logic-display { width: 100%; position: relative; min-height: 450px; margin-bottom: 60px; }
+        .logic-panel { 
+            display: none; width: 100%; animation: fadeIn 0.5s ease forwards; 
+            background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+            border-radius: 25px; border: 1px solid rgba(255,255,255,0.1); padding: 30px; box-sizing: border-box;
+        }
+        .logic-panel.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* 📊 실제 차트 느낌의 캔들 애니메이션 */
+        .chart-viz { 
+            width: 100%; height: 180px; background: #050505; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);
+            position: relative; overflow: hidden; margin-bottom: 25px;
+        }
+        .chart-grid { position: absolute; width: 100%; height: 100%; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 20px 20px; }
+        
+        .candle-container { display: flex; align-items: flex-end; gap: 4px; padding: 20px; height: 100%; animation: slideChart 20s linear infinite; width: 200%; }
+        @keyframes slideChart { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        
+        .candle { width: 10px; border-radius: 2px; position: relative; }
+        .candle::before { content: ''; position: absolute; width: 2px; height: 140%; left: 4px; bottom: -20%; opacity: 0.5; }
+        
+        /* 톤 구분 색상 */
+        .logic-1-color { color: #bf953f; border-color: #bf953f !important; }
+        .logic-2-color { color: #c0c0c0; border-color: #c0c0c0 !important; }
+        .logic-3-color { color: #ffffff; border-color: #ffffff !important; }
+
+        .candle.up { background: #ff4d4d; } .candle.up::before { background: #ff4d4d; }
+        .candle.down { background: #4d79ff; } .candle.down::before { background: #4d79ff; }
+        .gold-candle { background: #bf953f !important; } .gold-candle::before { background: #bf953f !important; }
+
+        .logic-info h2 { font-size: 22px; margin: 0 0 15px 0; font-weight: 800; }
+        .logic-info h3 { font-size: 17px; margin-bottom: 12px; color: #fff; }
+        .logic-info p { font-size: 15px; line-height: 1.7; color: #aaa; margin-bottom: 25px; }
+
+        .key-banner { padding: 15px; border-left: 4px solid; background: rgba(255,255,255,0.03); font-weight: 800; font-style: italic; font-size: 15px; }
+
+        /* 영상 카드 섹션 */
+        .video-section-title { margin: 60px 0 30px 0; }
+        .main-video-card { width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 20px; margin-bottom: 40px; box-sizing: border-box; }
+        video { width: 100%; border-radius: 12px; display: block; border: 1px solid rgba(255,255,255,0.05); }
+
+        .back-home { position: fixed; bottom: 30px; left: 30px; background: #bf953f; color: #000; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 900; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 1000; }
+
+        @media (max-width: 768px) {
+            .header-text h1 { font-size: 20px; }
+            .logic-panel { padding: 20px; }
+            .logic-info h2 { font-size: 19px; }
+        }
     </style>
 </head>
 <body>
+
     <div class="container">
         <div class="header-box">
             <img src="https://i.imgur.com/9VUt3sN.png" alt="Logo" class="brand-logo">
             <div class="header-text">
                 <h1>GOLD WAVE PROGRAM</h1>
-                <p>시스템의 가치와 기술적 로직을 경험하십시오</p>
+                <p>차세대 AI 시스템 알고리즘 가이드</p>
             </div>
         </div>
-        <div class="top-nav">
-            <button class="nav-btn" onclick="document.getElementById('logic-section').scrollIntoView()" style="border-color:#bf953f; color:#fff;">시스템 로직 설명</button>
-            <button class="nav-btn" onclick="document.getElementById('brand-videos').scrollIntoView()">브랜드 영상 (PART 1&2)</button>
+
+        <div class="logic-tabs">
+            <button class="tab-btn active" data-target="logic-1"><span>📈</span>메인 로직</button>
+            <button class="tab-btn" data-target="logic-2"><span>🛡️</span>런던 세션</button>
+            <button class="tab-btn" data-target="logic-3"><span>⚡</span>뉴욕 세션</button>
         </div>
-        <div id="logic-section" class="logic-section">
-            <div class="header-box" style="border-left-color: #ffcc00; margin-bottom: 30px;">
-                <div class="header-text">
-                    <h1 style="color: #ffcc00;">CORE ALGORITHM LOGIC</h1>
-                    <p>GOLD WAVE가 시장을 분석하고 대응하는 핵심 논리</p>
+
+        <div class="logic-display">
+            <div id="logic-1" class="logic-panel active">
+                <div class="chart-viz">
+                    <div class="chart-grid"></div>
+                    <div class="candle-container" id="candle-1"></div>
+                </div>
+                <div class="logic-info">
+                    <h2 class="logic-1-color">메인 로직 (기존 핵심 전략)</h2>
+                    <h3>시장 구조 판독을 통한 <span class="logic-1-color">추세 추종형 전략</span></h3>
+                    <p>단순한 지표 진입이 아닌 파동의 구조와 시장 에너지를 분석합니다. <br>상승과 하락의 명확한 흐름을 포착하여 가장 확률 높은 타점에서만 진입을 실행합니다.</p>
+                    <div class="key-banner logic-1-color">“시장 방향을 따라가는 구조 기반 핵심 전략”</div>
                 </div>
             </div>
-            <div class="logic-card">
-                <div class="logic-title">1. 메인 로직 : 파동 기반 추세 대응</div>
-                <div class="viz-container">
-                    <div class="scan-bar"></div>
-                    <p style="position:absolute; bottom:10px; left:15px; font-size:10px; color:#bf953f; opacity:0.6;">ANALYZING MARKET STRUCTURE...</p>
+
+            <div id="logic-2" class="logic-panel">
+                <div class="chart-viz">
+                    <div class="chart-grid"></div>
+                    <div class="candle-container" id="candle-2" style="animation-duration: 30s;"></div>
                 </div>
-                <div class="logic-content">
-                    <div class="logic-text">
-                        <h3>시장 흐름 기반으로 <span class="highlight">확률 높은 구간만 진입</span></h3>
-                        구조 + 흐름 + 타점 결합 방식을 채택하여 불필요한 매매를 최소화하고 안정적인 수익 누적 구조를 만듭니다.
-                        <div class="key-point-banner">“시장 방향을 따라가는 구조 기반 핵심 전략”</div>
-                    </div>
+                <div class="logic-info">
+                    <h2 class="logic-2-color">런던 세션 (단기/안정형 전략)</h2>
+                    <h3>유럽 세션의 변동성을 활용한 <span class="logic-2-color">안정적 수익 누적</span></h3>
+                    <p>비교적 차분하고 일정한 런던 세션의 흐름을 타겟팅합니다. <br>리스크 관리에 최적화된 짧은 타점과 안정적인 헷징 기술을 통해 원금을 보호하며 수익을 쌓아갑니다.</p>
+                    <div class="key-banner logic-2-color">“안정성을 최우선으로 하는 원금 보호 특화 전략”</div>
                 </div>
             </div>
-            <div class="logic-card">
-                <div class="logic-title">2. 24시간 자동 헷징 리스크 관리</div>
-                <div class="logic-content">
-                    <div class="logic-text">
-                        수익보다 중요한 것은 <span class="highlight">원금 보호</span>입니다. 예상치 못한 변동 시 즉각적으로 반대 포지션을 고려하거나 비중을 조절하는 <span class="highlight">자동 헷징 알고리즘</span>이 작동합니다.
-                    </div>
-                    <img src="https://i.imgur.com/vH9vVat.png" class="logic-img" alt="리스크 관리">
+
+            <div id="logic-3" class="logic-panel">
+                <div class="chart-viz">
+                    <div class="chart-grid"></div>
+                    <div class="candle-container" id="candle-3" style="animation-duration: 15s;"></div>
+                </div>
+                <div class="logic-info">
+                    <h2 class="logic-3-color">뉴욕 세션 (중기/확장형 전략)</h2>
+                    <h3>극심한 변동성을 돌파하는 <span class="logic-3-color">수익 극대화 전략</span></h3>
+                    <p>시장 에너지가 가장 강력한 뉴욕 세션의 움직임을 포착합니다. <br>큰 폭의 파동을 중기적으로 추적하여 변동성이 클수록 더 큰 수익으로 전환시키는 확장형 알고리즘입니다.</p>
+                    <div class="key-banner logic-3-color">“강력한 변동성을 수익으로 전환하는 확장형 전략”</div>
                 </div>
             </div>
         </div>
+
         <div id="brand-videos">
-            <div class="header-box" style="margin-top: 40px; margin-bottom: 30px;">
+            <div class="header-box video-section-title">
                 <div class="header-text">
                     <h1>GOLD WAVE BRAND STORY</h1>
-                    <p>AI가 설계한 황금빛 물결, 투자의 새로운 패러다임</p>
+                    <p>브랜드 철학과 AI 시스템의 비전</p>
                 </div>
             </div>
-            <div id="card-1" class="main-video-card">
-                <h2>PART 01. AI 시스템 투자 철학 : 리스크와 시스템</h2>
-                <div class="video-box">
-                    <video onplay="highlightCard('card-1')" onpause="removeHighlight('card-1')" controls>
-                        <source src="https://goldwave-notice.github.io/-/1_보완.mp4" type="video/mp4">
-                    </video>
-                </div>
+
+            <div class="main-video-card">
+                <h2 style="font-size:16px; margin-bottom:15px; color:#bf953f;">PART 01. 투자 철학 영상</h2>
+                <video controls><source src="https://goldwave-notice.github.io/-/1_보완.mp4" type="video/mp4"></video>
             </div>
-            <div id="card-2" class="main-video-card">
-                <h2>PART 02. GOLD WAVE : 브랜드 소개 영상</h2>
-                <div class="video-box">
-                    <video id="intro-video" onplay="highlightCard('card-2')" onpause="removeHighlight('card-2')" controls>
-                        <source src="https://goldwave-notice.github.io/-/GOLDE WAVE MP4 VOICE.mp4" type="video/mp4">
-                    </video>
-                </div>
+
+            <div class="main-video-card">
+                <h2 style="font-size:16px; margin-bottom:15px; color:#bf953f;">PART 02. 브랜드 소개 영상</h2>
+                <video controls><source src="https://goldwave-notice.github.io/-/GOLDE WAVE MP4 VOICE.mp4" type="video/mp4"></video>
             </div>
         </div>
     </div>
+
     <a href="https://goldwave-notice.github.io/-/dashboard.html" class="back-home">🏠 홈</a>
+
     <script>
-        function highlightCard(cardId) { document.getElementById(cardId).classList.add('playing'); }
-        function removeHighlight(cardId) { document.getElementById(cardId).classList.remove('playing'); }
+        // 탭 전환 스크립트
+        const tabs = document.querySelectorAll('.tab-btn');
+        const panels = document.querySelectorAll('.logic-panel');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.target).classList.add('active');
+            });
+        });
+
+        // 📊 캔들 차트 생성기 (랑이의 이미지 느낌 재현)
+        function createCandles(containerId, isGold = false) {
+            const container = document.getElementById(containerId);
+            for (let i = 0; i < 60; i++) {
+                const candle = document.createElement('div');
+                const height = Math.floor(Math.random() * 60) + 20;
+                candle.className = `candle ${Math.random() > 0.5 ? 'up' : 'down'}`;
+                if (isGold && Math.random() > 0.7) candle.classList.add('gold-candle');
+                candle.style.height = `${height}px`;
+                container.appendChild(candle);
+            }
+        }
+
+        createCandles('candle-1', true);
+        createCandles('candle-2');
+        createCandles('candle-3');
     </script>
 </body>
 </html>
