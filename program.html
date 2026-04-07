@@ -10,7 +10,7 @@
         
         .container { width: 92%; max-width: 900px; margin-top: 50px; position: relative; }
 
-        /* 상단 메뉴 - 호버 및 활성화 */
+        /* 상단 메뉴 - 호버 후광 및 클릭 시 활성화 */
         .top-nav-fixed { position: fixed; top: 0; left: 0; width: 100%; height: 75px; background: rgba(5, 6, 8, 0.98); border-bottom: 2px solid #bf953f; display: flex; justify-content: center; align-items: center; z-index: 10000; backdrop-filter: blur(20px); }
         .nav-content { width: 92%; max-width: 900px; display: flex; justify-content: space-between; align-items: center; }
         .nav-links { display: flex; gap: 15px; }
@@ -83,18 +83,20 @@
             <div class="header-box">
                 <div class="header-text"><h1>GOLD WAVE PROGRAM</h1><p>차세대 AI 알고리즘의 과학적 설계 원리</p></div>
             </div>
+            
             <div class="tab-menu">
-                <button class="tab-btn active" onclick="showTab(1)">MAIN (GOLD)</button>
-                <button class="tab-btn" onclick="showTab(2)">LONDON (SILVER)</button>
-                <button class="tab-btn" onclick="showTab(3)">NEWYORK (WHITE)</button>
+                <button class="tab-btn active" id="tabBtn1" onclick="showTab(1)">MAIN (GOLD)</button>
+                <button class="tab-btn" id="tabBtn2" onclick="showTab(2)">LONDON (SILVER)</button>
+                <button class="tab-btn" id="tabBtn3" onclick="showTab(3)">NEWYORK (WHITE)</button>
             </div>
+
             <div id="logic1" class="logic-card active">
                 <div class="logic-title-final">메인 로직 : <span style="color:#ffcc00;">파동 기반</span> 추세 대응 전략</div>
                 <div class="engine-display">
                     <div class="chart-area"><video autoplay loop muted playsinline><source src="https://goldwave-notice.github.io/-/수익그래프1.mp4" type="video/mp4"></video></div>
                     <div class="terminal-area">
                         <div class="terminal-header"><span>DATA LOG CENTER</span><span class="live-tag">● LIVE</span></div>
-                        <div id="terminal-log"></div>
+                        <div id="terminal-log1"></div>
                     </div>
                 </div>
                 <div class="logic-text-final">
@@ -104,29 +106,50 @@
                 </div>
                 <div class="summary-gold-box"><span>"시장 방향을 따라가는 구조 기반의 핵심 전략 입니다."</span></div>
             </div>
-            <div id="logic2" class="logic-card"><p style="text-align:center; padding:100px;">[ LONDON SESSION COMING SOON ]</p></div>
-            <div id="logic3" class="logic-card"><p style="text-align:center; padding:100px;">[ NEWYORK SESSION COMING SOON ]</p></div>
+
+            <div id="logic2" class="logic-card">
+                <div class="logic-title-final">런던 로직 : <span style="color:#aaa;">단기 / 안정형</span> - 시간대 특화 단기 전략</div>
+                <div class="engine-display">
+                    <div class="chart-area" style="background: #000; border: 1px dashed #444; display: flex; align-items: center; justify-content: center;">
+                        <p style="color:#444;">[ 런던 세션 그래프 데이터 비워둠 ]</p>
+                    </div>
+                    <div class="terminal-area">
+                        <div class="terminal-header"><span>LONDON LOG CENTER</span><span class="live-tag">● LIVE</span></div>
+                        <div id="terminal-log2"></div>
+                    </div>
+                </div>
+                <div class="logic-text-final">
+                    <p>유럽장 개장 <span class="point-focus">(KST 14~19시)</span> 하루 1회 진입합니다. <br>
+                    운영 방식은 1차 익절 후 일부 청산, 나머지는 <span class="point-focus">트레일링</span>, <br>
+                    <span class="point-focus">22:00 강제 청산</span> 되게 합니다.</p>
+                    <p>가장 큰 특징은 <span class="point-focus">당일 마감 구조</span>와 <span class="point-focus">짧고 빠른 수익 회수</span>입니다.</p>
+                </div>
+                <div class="summary-gold-box">
+                    <span>"짧게 먹고 끝내는 안정형 단기 전략"</span>
+                </div>
+            </div>
+
+            <div id="logic3" class="logic-card">
+                <div class="logic-title-final">뉴욕 로직 : <span style="color:#eee;">추세 추종형</span> - 고유동성 돌파 전략</div>
+                <div class="engine-display"><div class="chart-area"></div><div class="terminal-area"></div></div>
+                <p style="text-align:center; padding:50px; color:#555;">[ NEWYORK SESSION SKELETON READY ]</p>
+            </div>
         </div>
 
         <div id="brand-story" style="padding-top:100px; margin-top:50px;">
             <div class="header-box">
                 <div class="header-text"><h1>GOLD WAVE BRAND STORY</h1><p>AI가 설계한 황금빛 물결, 투자의 새로운 패러다임</p></div>
             </div>
-            
             <div id="card-1" class="main-video-card">
                 <h2>PART 01. AI 시스템 투자 철학 : 리스크와 시스템</h2>
                 <div class="video-box"><video onplay="highlightCard('card-1')" onpause="removeHighlight('card-1')" controls><source src="https://goldwave-notice.github.io/-/1_보완.mp4" type="video/mp4"></video></div>
             </div>
-
             <div id="card-2" class="main-video-card">
                 <h2>PART 02. GOLD WAVE : 브랜드 소개 영상</h2>
                 <div class="video-box"><video id="intro-video" onplay="highlightCard('card-2'); document.getElementById('script-box').style.display='block';" onpause="removeHighlight('card-2')" controls><source src="https://goldwave-notice.github.io/-/GOLDE WAVE MP4 VOICE.mp4" type="video/mp4"></video></div>
                 <div id="script-box">
                     <h3 style="color:#bf953f; font-size:20px; margin-bottom:15px; font-weight:800;">01. 왜 금(GOLD)인가?</h3>
-                    <p>시장은 언제나 움직이지만, 모든 움직임이 기회가 되는 것은 아닙니다.</p>
-                    <p><span style="color:#ffcc00; font-weight:700;">금과 은</span>은 가장 오래 살아남은 자산입니다. GOLD WAVE는 이 지속적인 가치를 기반으로 설계되었습니다.</p>
-                    <h3 style="color:#bf953f; font-size:20px; margin-bottom:15px; font-weight:800; margin-top:30px;">02. 전략적 특징</h3>
-                    <p>독자적인 시그널 알고리즘으로 <span style="color:#ffcc00; font-weight:700;">24시간 자동 매매</span>를 실현하며 리스크 분산 구조를 갖추고 있습니다.</p>
+                    <p><span style="color:#ffcc00; font-weight:700;">금과 은</span>은 가장 오래 살아남은 자산입니다.</p>
                 </div>
             </div>
         </div>
@@ -135,6 +158,15 @@
     <a href="https://goldwave-notice.github.io/-/dashboard.html" class="back-home">🏠 홈</a>
 
     <script>
+        // 탭 전환 기능
+        function showTab(n) {
+            document.querySelectorAll('.logic-card').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('logic' + n).classList.add('active');
+            document.getElementById('tabBtn' + n).classList.add('active');
+        }
+
+        // 스크롤 이동
         function scrollToSection(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
             document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
@@ -142,20 +174,31 @@
             if(id === 'brand-story') document.getElementById('nav-brand').classList.add('active');
         }
 
-        function showTab(n) {
-            document.querySelectorAll('.logic-card').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('logic' + n).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
+        // 데이터 대시보드 로직 (로직 1 & 2 각각)
+        const logBox1 = document.getElementById('terminal-log1');
+        const logBox2 = document.getElementById('terminal-log2');
 
-        const logBox = document.getElementById('terminal-log');
-        const getLogMsg = () => {
+        const getLogMsg = (session) => {
             const profit = (Math.random() * 2000 + 500).toLocaleString(undefined, {minimumFractionDigits: 2});
-            const pool = [`ANALYZING MARKET STRUCTURE... [OK]`,`WAVE PATTERN MATCHED: 0.964`,`PROFIT REALIZED: <span class="log-profit">+$${profit}</span>`,`AI ENTRY CONFIRMED: #GW-${Math.floor(Math.random()*8999)+1000}`,`CURRENT RETURN: <span class="log-profit">+${(Math.random()*20+10).toFixed(2)}%</span>`,`SIGNAL VALIDATION: HIGH PROBABILITY` ];
-            return pool[Math.floor(Math.random()*pool.length)];
+            return `> ${session} ANALYSIS... [OK] | PROFIT: <span class="log-profit">+$${profit}</span>`;
         };
-        setInterval(() => { if(!logBox) return; const line = document.createElement('div'); line.className = 'log-line'; line.innerHTML = `> ${getLogMsg()}`; logBox.prepend(line); if(logBox.children.length > 15) logBox.removeChild(logBox.lastChild); }, 300);
+
+        setInterval(() => {
+            if(logBox1) {
+                const line = document.createElement('div');
+                line.className = 'log-line';
+                line.innerHTML = getLogMsg('GOLD');
+                logBox1.prepend(line);
+                if(logBox1.children.length > 12) logBox1.removeChild(logBox1.lastChild);
+            }
+            if(logBox2) {
+                const line = document.createElement('div');
+                line.className = 'log-line';
+                line.innerHTML = getLogMsg('LONDON');
+                logBox2.prepend(line);
+                if(logBox2.children.length > 12) logBox2.removeChild(logBox2.lastChild);
+            }
+        }, 400);
 
         function highlightCard(id) { document.getElementById(id).classList.add('playing'); }
         function removeHighlight(id) { document.getElementById(id).classList.remove('playing'); }
