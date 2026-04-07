@@ -3,204 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOLD WAVE - 시스템 알고리즘 가이드</title>
+    <title>GOLD WAVE PROGRAM</title>
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-        
         body { margin: 0; padding: 0; background-color: #050608; font-family: 'Pretendard', sans-serif; color: #e0e0e0; display: flex; flex-direction: column; align-items: center; padding-top: 80px; padding-bottom: 100px; scroll-behavior: smooth; overflow-x: hidden; }
         .container { width: 92%; max-width: 900px; margin-top: 30px; }
-
-        /* 🆕 고정형 상단 메뉴 바 (네온 골드 포인트) */
-        .top-nav { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 75px; 
-            background: rgba(5, 6, 8, 0.9); border-bottom: 2px solid #bf953f;
-            display: flex; justify-content: center; align-items: center; z-index: 10000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8); backdrop-filter: blur(15px);
-        }
+        .top-nav { position: fixed; top: 0; left: 0; width: 100%; height: 75px; background: rgba(5, 6, 8, 0.95); border-bottom: 2px solid #bf953f; display: flex; justify-content: center; align-items: center; z-index: 10000; backdrop-filter: blur(15px); }
         .nav-content { width: 92%; max-width: 900px; display: flex; justify-content: space-between; align-items: center; }
-        .nav-logo { width: 40px; height: auto; filter: drop-shadow(0 0 8px #bf953f); }
+        .nav-logo { width: 38px; height: auto; filter: drop-shadow(0 0 5px #bf953f); }
         .nav-links { display: flex; gap: 8px; }
-        .nav-link { 
-            background: none; border: 1px solid rgba(191,149,63,0.2); color: #fff; padding: 12px 22px; 
-            border-radius: 50px; cursor: pointer; font-weight: 800; font-size: 13.5px; transition: 0.3s; 
-            text-decoration: none; text-shadow: 0 0 5px rgba(255,255,255,0.3);
-        }
-        .nav-link:hover, .nav-link.active { background: rgba(191, 149, 63, 0.2); border-color: #bf953f; color: #bf953f; box-shadow: 0 0 15px rgba(191,149,63,0.3); }
-
-        /* 헤더 섹션 */
+        .nav-link { background: none; border: 1px solid rgba(191,149,63,0.2); color: #fff; padding: 10px 18px; border-radius: 50px; cursor: pointer; font-weight: 800; font-size: 13px; text-decoration: none; }
+        .nav-link:hover { background: rgba(191, 149, 63, 0.2); border-color: #bf953f; color: #bf953f; }
         .header-box { display: flex; align-items: center; border-left: 6px solid #bf953f; padding-left: 20px; margin-bottom: 40px; }
-        .header-text h1 { color: #bf953f; font-size: 28px; margin: 0; font-weight: 900; letter-spacing: -1px; }
-        .header-text p { color: #888; font-size: 15px; margin-top: 5px; font-weight: 600; }
-
-        /* 📊 공학적 리얼타임 대시보드 */
-        .logic-card { 
-            background: #0d0f14; border: 1px solid rgba(191, 149, 63, 0.3); border-radius: 20px;
-            padding: 30px; margin-bottom: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-        .logic-title { color: #bf953f; font-size: 22px; font-weight: 900; margin-bottom: 25px; border-bottom: 1px solid rgba(191,149,63,0.1); padding-bottom: 15px; }
-
-        /* 📟 터미널 & 차트 통합 엔진 */
-        .engine-display { 
-            width: 100%; height: 320px; background: #000; border-radius: 12px; border: 1px solid #1a1c22;
-            display: flex; position: relative; overflow: hidden; margin-bottom: 25px;
-        }
-
-        /* 📈 리얼타임 차트 영역 */
-        .chart-area { flex: 1.5; position: relative; border-right: 1px solid #1a1c22; overflow: hidden; background: #020202; }
-        .chart-grid { position: absolute; width: 100%; height: 100%; background-image: radial-gradient(circle, #1a1c22 1px, transparent 1px); background-size: 20px 20px; opacity: 0.5; }
-        
-        /* 🟢 초록색 실선 그래프 애니메이션 */
-        .svg-line-container { position: absolute; width: 200%; height: 100%; left: 0; top: 0; animation: chartScroll 10s linear infinite; }
-        @keyframes chartScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        
-        /* 📟 매트릭스 로그 터미널 영역 */
-        .terminal-area { flex: 1; background: #000; padding: 15px; font-family: 'Courier New', Courier, monospace; font-size: 11px; color: #00ff41; overflow: hidden; display: flex; flex-direction: column; }
-        .terminal-header { font-weight: 900; border-bottom: 1px solid #004d1a; margin-bottom: 10px; padding-bottom: 5px; color: #fff; display: flex; justify-content: space-between; }
-        .log-line { margin: 3px 0; opacity: 0.8; animation: logFade 2s forwards; }
-        @keyframes logFade { from { opacity: 0; transform: translateY(5px); } to { opacity: 0.8; transform: translateY(0); } }
-
-        /* 텍스트 컨텐츠 영역 */
-        .logic-text h3 { font-size: 20px; color: #fff; margin-bottom: 15px; font-weight: 800; }
-        .logic-text p { font-size: 16px; line-height: 1.8; color: #aaa; }
-        .highlight { color: #00ff41; font-weight: 900; text-shadow: 0 0 5px rgba(0,255,65,0.3); }
-        .key-point-banner { 
-            background: rgba(191, 149, 63, 0.1); border-left: 5px solid #bf953f; 
-            padding: 20px; color: #ffcc00; font-weight: 900; font-style: italic; font-size: 16px; margin-top: 30px;
-        }
-
-        /* 홈 버튼 */
-        .back-home { position: fixed; bottom: 30px; left: 30px; background: #bf953f; color: #000; padding: 16px 40px; border-radius: 50px; text-decoration: none; font-weight: 900; box-shadow: 0 10px 30px rgba(191,149,63,0.4); z-index: 1000; }
-
-        @media (max-width: 768px) {
-            .engine-display { flex-direction: column; height: 500px; }
-            .chart-area { height: 250px; border-right: none; border-bottom: 1px solid #1a1c22; }
-            .nav-link { padding: 10px 15px; font-size: 11px; }
-        }
+        .header-text h1 { color: #bf953f; font-size: 26px; margin: 0; font-weight: 900; }
+        .logic-card { background: #0d0f14; border: 1px solid rgba(191, 149, 63, 0.2); border-radius: 20px; padding: 30px; margin-bottom: 40px; }
+        .logic-title { color: #bf953f; font-size: 20px; font-weight: 900; margin-bottom: 25px; border-bottom: 1px solid rgba(191,149,63,0.1); padding-bottom: 15px; }
+        .engine-display { width: 100%; height: 350px; background: #000; border-radius: 12px; border: 1px solid #1a1c22; display: flex; position: relative; overflow: hidden; margin-bottom: 25px; }
+        .chart-area { flex: 1.6; position: relative; border-right: 1px solid #1a1c22; overflow: hidden; background: #020202; }
+        .chart-grid { position: absolute; width: 100%; height: 100%; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 20px 20px; }
+        .candle-viewport { display: flex; align-items: center; gap: 4px; padding: 20px; height: 100%; position: absolute; right: 0; }
+        .candle { width: 10px; border-radius: 1px; position: relative; flex-shrink: 0; }
+        .candle.up { background: #00ff41; box-shadow: 0 0 8px rgba(0,255,65,0.4); }
+        .candle.down { background: #333; border: 1px solid #555; }
+        .live-scanner-tag { position: absolute; top: 15px; left: 15px; color: #00ff41; font-size: 11px; font-weight: 900; text-shadow: 0 0 10px #00ff41; animation: scanningBlink 1.5s infinite; }
+        @keyframes scanningBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+        .terminal-area { flex: 1; background: #000; padding: 15px; font-family: 'Courier New', monospace; font-size: 11px; overflow: hidden; }
+        .terminal-header { color: #ffa500; font-weight: 900; border-bottom: 1px solid #333; margin-bottom: 10px; padding-bottom: 5px; display: flex; justify-content: space-between; }
+        .log-line { margin: 5px 0; color: #00ff41; opacity: 0.9; line-height: 1.4; }
+        .log-profit { color: #ff3333 !important; font-weight: 900; }
+        .logic-text p { font-size: 16px; line-height: 1.8; color: #ccc; margin: 15px 0; }
+        .key-point-banner { background: linear-gradient(145deg, #aa771c, #bf953f); border-radius: 12px; padding: 22px; color: #000; font-weight: 900; font-style: italic; font-size: 17px; margin-top: 35px; text-align: center; box-shadow: inset 2px 2px 5px rgba(255,255,255,0.4), 5px 5px 15px rgba(0,0,0,0.4); letter-spacing: 1.5px; }
+        .back-home { position: fixed; bottom: 30px; left: 30px; background: #bf953f; color: #000; padding: 16px 40px; border-radius: 50px; text-decoration: none; font-weight: 900; z-index: 1000; }
+        @media (max-width: 768px) { .engine-display { flex-direction: column; height: 550px; } .chart-area { border-right: none; border-bottom: 1px solid #1a1c22; } }
     </style>
 </head>
 <body>
-
     <nav class="top-nav">
         <div class="nav-content">
             <img src="https://i.imgur.com/9VUt3sN.png" alt="Logo" class="nav-logo">
             <div class="nav-links">
-                <button class="nav-link active" onclick="document.getElementById('logic-section').scrollIntoView()">시스템 로직 설명</button>
+                <button class="nav-link" onclick="document.getElementById('logic-section').scrollIntoView()">시스템 로직 설명</button>
                 <a href="https://goldwave-notice.github.io/-/profit.html" class="nav-link">수익 현황</a>
                 <button class="nav-link" onclick="document.getElementById('brand-story').scrollIntoView()">브랜드 스토리</button>
             </div>
         </div>
     </nav>
-
     <div class="container">
         <div class="header-box">
-            <div class="header-text">
-                <h1>골드웨이브 프로그램이란?</h1>
-                <p>AI가 설계한 정밀 알고리즘의 과학적 설계 원리</p>
-            </div>
+            <div class="header-text"><h1>골드웨이브 프로그램이란?</h1></div>
         </div>
-
-        <div id="logic-section" class="logic-section">
+        <div id="logic-section">
             <div class="logic-card">
-                <div class="logic-title">1️⃣ 메인 로직 : 파동 기반 추세 대응</div>
-
+                <div class="logic-title">1. 메인 로직 : 파동 기반 추세 대응</div>
                 <div class="engine-display">
                     <div class="chart-area">
                         <div class="chart-grid"></div>
-                        <svg class="svg-line-container" viewBox="0 0 1000 200">
-                            <path id="wave-path" d="M0,100 Q125,20 250,100 T500,100 T750,100 T1000,100" fill="none" stroke="#00ff41" stroke-width="2" />
-                            <g id="candle-group"></g>
-                        </svg>
-                        <div style="position:absolute; top:15px; left:15px; color:#00ff41; font-size:10px; font-weight:900; opacity:0.6;">LIVE SCANNING...</div>
+                        <div class="live-scanner-tag">GOLD WAVE LIVE SCANNING</div>
+                        <div class="candle-viewport" id="candle-engine"></div>
                     </div>
-
                     <div class="terminal-area">
-                        <div class="terminal-header">
-                            <span>TERMINAL v2.0</span>
-                            <span style="color:#00ff41;">● LIVE</span>
-                        </div>
-                        <div id="log-container">
-                            </div>
+                        <div class="terminal-header"><span>DATA LOG CENTER</span><span style="color:#ffa500;">● LIVE</span></div>
+                        <div id="terminal-log"></div>
                     </div>
                 </div>
-
                 <div class="logic-text">
-                    <h3>시장 흐름(상승/하락 구조) 기반으로<br><span class="highlight">확률 높은 구간에서만 진입</span></h3>
-                    <p>
-                        단순 지표 진입이 아닌 <span class="highlight">구조 + 흐름 + 타점</span>의 3단계 필터링 결합 방식을 채택합니다. 
-                        불필요한 매매를 80% 이상 제거하여 안정적인 수익 누적 구조를 만듭니다.
-                    </p>
-                    <div class="key-point-banner">
-                        “시장 방향을 따라가는 구조 기반 핵심 전략”
-                    </div>
+                    <p>시장 흐름(상승/하락 구조)을 기반으로 확률 높은 구간에서만 진입</p>
+                    <p>단순 지표 진입이 아닌 구조 + 흐름 + 타점 결합 방식을 채택합니다. 불필요한 매매 최소화하여 안정적인 수익 누적 구조를 만듭니다.</p>
                 </div>
+                <div class="key-point-banner">"시장 방향을 따라가는 구조 기반의 핵심 전략"</div>
             </div>
-
-            <div class="logic-card" style="opacity: 0.3; border-style: dashed;">
-                <div class="logic-title">2️⃣ 런던 세션 로직 (안정형)</div>
+            <div class="logic-card" style="opacity:0.3; border-style:dashed;">
+                <div class="logic-title">2. 런던 세션 로직 (안정형)</div>
                 <p style="text-align:center;">[ 차후 업데이트 예정 ]</p>
             </div>
-            <div class="logic-card" style="opacity: 0.3; border-style: dashed;">
-                <div class="logic-title">3️⃣ 뉴욕 세션 로직 (확장형)</div>
+            <div class="logic-card" style="opacity:0.3; border-style:dashed;">
+                <div class="logic-title">3. 뉴욕 세션 로직 (확장형)</div>
                 <p style="text-align:center;">[ 차후 업데이트 예정 ]</p>
             </div>
         </div>
-
-        <div id="brand-story" style="margin-top:80px;">
-            <div class="header-box">
-                <div class="header-text">
-                    <h1>GOLD WAVE BRAND STORY</h1>
-                    <p>브랜드 철학과 AI 비전</p>
-                </div>
-            </div>
-            <div style="background:rgba(255,255,255,0.03); border-radius:20px; padding:20px; border:1px solid rgba(255,255,255,0.05);">
-                <video controls style="width:100%; border-radius:10px;"><source src="https://goldwave-notice.github.io/-/GOLDE WAVE MP4 VOICE.mp4" type="video/mp4"></video>
-            </div>
+        <div id="brand-story" style="margin-top:60px;">
+            <div class="header-box"><div class="header-text"><h1>GOLD WAVE BRAND STORY</h1></div></div>
+            <video controls style="width:100%; border-radius:10px; background:#0d0f14;"><source src="https://goldwave-notice.github.io/-/GOLDE WAVE MP4 VOICE.mp4" type="video/mp4"></video>
         </div>
     </div>
-
     <a href="https://goldwave-notice.github.io/-/dashboard.html" class="back-home">🏠 홈</a>
-
     <script>
-        // 📊 캔들 생성기 (공학적 느낌)
-        const candleGroup = document.getElementById('candle-group');
-        for (let i = 0; i < 100; i++) {
-            const x = i * 15;
-            const h = Math.random() * 60 + 20;
-            const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-            rect.setAttribute("x", x);
-            rect.setAttribute("y", 100 - (h/2));
-            rect.setAttribute("width", "3");
-            rect.setAttribute("height", h);
-            rect.setAttribute("fill", Math.random() > 0.5 ? "#003314" : "#1a1a1a");
-            candleGroup.appendChild(rect);
+        const engine = document.getElementById('candle-engine');
+        let candleCount = 0;
+        function addCandle() {
+            const candle = document.createElement('div');
+            const h = Math.floor(Math.random() * 100) + 20;
+            const isUp = Math.random() > 0.4;
+            candle.className = `candle ${isUp ? 'up' : 'down'}`;
+            candle.style.height = h + 'px';
+            engine.appendChild(candle);
+            candleCount++;
+            if (candleCount > 40) engine.removeChild(engine.firstChild);
         }
-
-        // 📟 터미널 로그 생성기 (매트릭스 감성)
-        const logContainer = document.getElementById('log-container');
-        const logMessages = [
-            "$ ANALYZING MARKET STRUCTURE...",
-            "$ SIGNAL: XAU/USD DETECTED",
-            "$ COORDINATE: 2439.12 // 0.88",
-            "$ AI SCANNING VOLATILITY...",
-            "$ ENTRY POINT VALIDATED",
-            "$ PROFIT MARGIN: +12.4%",
-            "$ RISK RATIO: LOW [STABLE]",
-            "$ BOT STATUS: EXECUTING...",
-            "$ DATA ENCRYPTION: SECURE",
-            "$ CLOUD SERVER CONNECTED"
-        ];
-
-        function addLog() {
+        setInterval(addCandle, 800);
+        const logBox = document.getElementById('terminal-log');
+        const messages = ["SCANNING XAU/USD...", "WAVE PATTERN: 0.882", "SIGNAL: SUCCESS", "ORDER: #7721-B", "PROFIT: +$245.50", "RISK: STABLE", "AI COORD: 2439.12", "PROFIT: +15.42%"];
+        function pushLog() {
             const line = document.createElement('div');
             line.className = 'log-line';
-            line.innerText = logMessages[Math.floor(Math.random() * logMessages.length)];
-            logContainer.prepend(line);
-            
-            if (logContainer.children.length > 12) {
-                logContainer.removeChild(logContainer.lastChild);
-            }
+            const msg = messages[Math.floor(Math.random() * messages.length)];
+            if (msg.includes('+')) line.classList.add('log-profit');
+            line.innerText = `> ${msg}`;
+            logBox.prepend(line);
+            if (logBox.children.length > 15) logBox.removeChild(logBox.lastChild);
         }
-        setInterval(addLog, 1200);
+        setInterval(pushLog, 400);
     </script>
 </body>
 </html>
