@@ -15,7 +15,7 @@
         .progress-container { width: 75%; background: #333; height: 6px; border-radius: 3px; margin: 0 auto; overflow: hidden; }
         .progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #bf953f, #fcf6ba); transition: width 0.3s; }
         
-        /* 🔴 랑이 요청: 좌측 상단 뒤로가기 화살표 */
+        /* 뒤로가기 화살표 */
         .back-nav {
             position: fixed; top: 15px; left: 20px; z-index: 1100;
             text-decoration: none; color: #bf953f; font-size: 22px;
@@ -51,7 +51,7 @@
 <body>
 
     <div class="header-sticky">
-        <a href="dashboard.html" class="back-nav"><i class="fa-solid fa-arrow-left"></i></a>
+        <a href="dashboard-new.html" class="back-nav"><i class="fa-solid fa-arrow-left"></i></a>
         <div class="progress-title">GOLD WAVE 이용 가이드</div>
         <div class="progress-container"><div id="p-bar" class="progress-bar"></div></div>
     </div>
@@ -62,7 +62,6 @@
     </div>
 
     <div class="container">
-        
         <div id="program-section">
             <div class="brand-section">
                 <img src="https://i.imgur.com/9VUt3sN.png" alt="Logo" class="brand-logo">
@@ -121,15 +120,14 @@
                 <div class="instruction">모든 공란을 채우셨다면 <span>[동의하고 서명 완료]</span>를 클릭하세요. 이제 모든 절차가 끝났습니다!</div>
             </div>
         </div>
-
     </div>
 
     <script>
         function showTab(type) {
             const contract = document.getElementById('contract-section');
             const program = document.getElementById('program-section');
-            const tab1 = document.getElementById('tab1'); // 프로그램 탭
-            const tab2 = document.getElementById('tab2'); // 계약 탭
+            const tab1 = document.getElementById('tab1');
+            const tab2 = document.getElementById('tab2');
 
             if(type === 'program') {
                 program.style.display = 'block'; contract.style.display = 'none';
@@ -141,7 +139,6 @@
             window.scrollTo(0, 0);
         }
         
-        // 초기 로드 시 로직 (해시값이 없으면 프로그램 가이드 노출)
         window.onload = function() {
             if(window.location.hash === '#contract') { 
                 showTab('contract'); 
