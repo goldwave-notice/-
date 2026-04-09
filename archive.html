@@ -3,21 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOLD WAVE REPORT ARCHIVE</title>
+    <title>GOLD WAVE - 뉴스 리포트</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-        body { margin: 0; padding: 0; background-color: #0b0d11; font-family: 'Pretendard', sans-serif; color: #e0e0e0; display: flex; flex-direction: column; align-items: center; padding-bottom: 120px; }
-        .container { width: 100%; max-width: 850px; padding: 40px 20px; box-sizing: border-box; }
-        .header-box { display: flex; align-items: center; margin-bottom: 50px; border-left: 6px solid #bf953f; padding-left: 20px; }
-        .brand-logo { width: 40px; height: auto; margin-right: 15px; }
-        h1 { color: #bf953f; font-size: 22px; margin: 0; letter-spacing: -0.5px; line-height: 1.2; }
         
-        .report-list { display: flex; flex-direction: column; gap: 18px; }
+        body { 
+            margin: 0; padding: 0; background-color: #0b0d11; 
+            font-family: 'Pretendard', sans-serif; color: #e0e0e0; 
+            display: flex; flex-direction: column; align-items: center; 
+            padding-bottom: 120px; 
+        }
+
+        /* 🔴 통일성 1: 상단 고정 헤더 디자인 */
+        .header-sticky { 
+            position: fixed; top: 0; width: 100%; 
+            background: rgba(26, 29, 35, 0.95); 
+            border-bottom: 1px solid rgba(191, 149, 63, 0.3); 
+            z-index: 1000; padding: 15px 0; 
+            text-align: center; backdrop-filter: blur(10px); 
+        }
+        .header-title { font-size: 13px; font-weight: 800; color: #bf953f; letter-spacing: 1px; }
+
+        /* 🔴 통일성 2: 뒤로가기 화살표 (상단 왼쪽) */
+        .back-nav {
+            position: absolute; left: 20px; top: 50%; transform: translateY(-50%);
+            text-decoration: none; color: #bf953f; font-size: 20px;
+            transition: 0.3s;
+        }
+        .back-nav:hover { filter: drop-shadow(0 0 8px #bf953f); transform: translateY(-50%) translateX(-3px); }
+
+        /* 🔴 통일성 3: 중앙 정렬 컨테이너 (600px 최적화) */
+        .container { 
+            width: 92%; max-width: 600px; 
+            margin-top: 100px; 
+            display: flex; flex-direction: column; align-items: center; 
+        }
+
+        /* 🔴 상단 헤더 섹션 (중앙 정렬) */
+        .header-box-centered { text-align: center; margin-bottom: 50px; width: 100%; }
+        
+        /* 1번: 로고 */
+        .brand-logo { width: 55px; height: auto; margin-bottom: 15px; filter: drop-shadow(0 0 8px rgba(191, 149, 63, 0.5)); }
+        
+        /* 2번: GOLD WAVE ARCHIVE (금색, 800) */
+        .header-text h1 { color: #bf953f; font-size: 26px; margin: 0; font-weight: 800; letter-spacing: -0.5px; }
+        
+        /* 3번: 핵심만 담은 일간 뉴스 리포트 (#aaa, 14px) */
+        .header-text p { color: #aaa; font-size: 14px; margin-top: 8px; font-weight: 700; }
+
+        /* [기존 리포트 리스트 디자인 유지] */
+        .report-list { width: 100%; display: flex; flex-direction: column; gap: 18px; }
         .report-item {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(191, 149, 63, 0.15);
             border-radius: 18px;
-            padding: 22px 28px;
+            padding: 22px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -27,42 +68,52 @@
         .report-item:hover {
             background: rgba(191, 149, 63, 0.08);
             border-color: #bf953f;
-            transform: translateX(12px);
+            transform: translateX(10px); /* 랑이가 좋아한 옆으로 밀리기 효과 */
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
         .report-info { display: flex; flex-direction: column; gap: 8px; flex: 1; }
-        .report-date { color: #bf953f; font-weight: 800; font-size: 13px; letter-spacing: 0.5px; }
-        .report-title { color: #ffffff; font-size: 16.5px; font-weight: 600; line-height: 1.4; word-break: keep-all; }
-        .arrow { color: #bf953f; font-size: 22px; font-weight: bold; margin-left: 15px; }
+        .report-date { color: #bf953f; font-weight: 800; font-size: 12px; letter-spacing: 0.5px; }
+        .report-title { color: #ffffff; font-size: 15px; font-weight: 600; line-height: 1.4; word-break: keep-all; text-align: left; }
+        .arrow { color: #bf953f; font-size: 18px; font-weight: bold; margin-left: 15px; }
 
-        .back-home { position: fixed; bottom: 30px; background: linear-gradient(135deg, #bf953f, #aa771c); color: #000; padding: 16px 45px; border-radius: 50px; text-decoration: none; font-weight: 900; box-shadow: 0 10px 40px rgba(0,0,0,0.6); z-index: 1000; transition: transform 0.2s, box-shadow 0.2s; }
-        .back-home:active { transform: scale(0.92); box-shadow: 0 5px 20px rgba(0,0,0,0.4); }
+        @media (max-width: 600px) { 
+            .header-text h1 { font-size: 22px; } 
+            .back-nav { left: 15px; }
+        }
     </style>
 </head>
 <body>
 
+    <div class="header-sticky">
+        <a href="dashboard-new.html" class="back-nav"><i class="fa-solid fa-arrow-left"></i></a>
+        <div class="header-title">GOLD WAVE 1분 뉴스 리포트</div>
+    </div>
+
     <div class="container">
-        <div class="header-box">
+        <div class="header-box-centered">
             <img src="https://i.imgur.com/9VUt3sN.png" alt="Logo" class="brand-logo">
-            <h1>GOLD WAVE<br>REPORT ARCHIVE</h1>
+            <div class="header-text">
+                <h1>GOLD WAVE ARCHIVE</h1>
+                <p>핵심만 담은 일간 뉴스 리포트</p>
+            </div>
         </div>
 
         <div class="report-list">
-             <a href="https://goldwave-notice.github.io/-/260409.html" class="report-item">
-        <div class="report-info">
-            <span class="report-date">2026. 04. 09</span>
-            <span class="report-title">“금값, 휴전 속 ‘인하기대’ vs ‘위험선호’ 줄다리기</span>
-        </div>
-        <span class="arrow">→</span>
-    </a>
+            <a href="https://goldwave-notice.github.io/-/260409.html" class="report-item">
+                <div class="report-info">
+                    <span class="report-date">2026. 04. 09</span>
+                    <span class="report-title">“금값, 휴전 속 ‘인하기대’ vs ‘위험선호’ 줄다리기</span>
+                </div>
+                <span class="arrow">→</span>
+            </a>
 
             <a href="https://goldwave-notice.github.io/-/260406-2.html" class="report-item">
-        <div class="report-info">
-            <span class="report-date">2026. 04. 06</span>
-            <span class="report-title">“연준 기대 식었다”… 금값 상승 막히나, 4600달러 고비</span>
-        </div>
-        <span class="arrow">→</span>
-    </a>
+                <div class="report-info">
+                    <span class="report-date">2026. 04. 06</span>
+                    <span class="report-title">“연준 기대 식었다”… 금값 상승 막히나, 4600달러 고비</span>
+                </div>
+                <span class="arrow">→</span>
+            </a>
 
             <a href="https://goldwave-notice.github.io/-/260406.html" class="report-item">
                 <div class="report-info">
@@ -97,8 +148,6 @@
             </a>
         </div>
     </div>
-
-    <a href="https://goldwave-notice.github.io/-/dashboard.html" class="back-home">🏠 홈</a>
 
 </body>
 </html>
