@@ -10,10 +10,10 @@
     
     body { 
       margin: 0; background-color: #0b0d11; font-family: 'Pretendard', sans-serif; color: #e0e0e0; 
-      display: flex; flex-direction: column; align-items: center; padding: 80px 0; overflow-x: hidden;
+      display: flex; flex-direction: column; align-items: center; padding: 0 0 80px 0; overflow-x: hidden;
     }
-    
-    /* 🔴 [추가] 뉴스 페이지 전용 상단 고정 헤더 */
+
+    /* 🔴 [4/9 100% 동일] 뉴스 페이지 전용 상단 고정 헤더 */
     .header-sticky { 
         position: fixed; top: 0; width: 100%; 
         background: rgba(26, 29, 35, 0.95); 
@@ -21,9 +21,10 @@
         z-index: 1000; padding: 15px 0; 
         text-align: center; backdrop-filter: blur(10px); 
     }
+    /* 랑이님이 말씀하신 포인트 사이즈 13px로 완벽 수정 */
     .header-title { font-size: 13px; font-weight: 800; color: #bf953f; letter-spacing: 1px; }
 
-    /* 🔴 [추가] 뒤로가기 화살표 (목록 archive.html 연결) */
+    /* 🔴 [4/9 100% 동일] 뒤로가기 화살표 */
     .back-nav {
         position: absolute; left: 20px; top: 50%; transform: translateY(-50%);
         text-decoration: none; color: #bf953f; font-size: 20px;
@@ -34,17 +35,13 @@
     /* 🔴 상단바 여백 확보 */
     .container { width: 95%; max-width: 1350px; margin-top: 80px; }
 
-    /* [높이 보정] stretch 설정으로 이미지와 텍스트 박스 하단 라인을 칼같이 맞춤 */
+    /* [4/10 프리미엄 레이아웃 유지] */
     .main-section { display: flex; gap: 40px; align-items: stretch; margin-bottom: 60px; }
     .img-area { flex: 1; min-width: 550px; display: flex; }
     .img-area img { 
-      width: 100%; 
-      height: 100%; 
-      min-height: 100%;
-      border-radius: 20px; 
-      border: 1px solid #bf953f; 
-      object-fit: cover; 
-      background-color: #000;
+      width: 100%; height: 100%; min-height: 100%;
+      border-radius: 20px; border: 1px solid #bf953f; 
+      object-fit: cover; background-color: #000;
       box-shadow: 0 30px 60px rgba(0,0,0,0.6); 
     }
 
@@ -96,10 +93,15 @@
     .scroll-indicator { text-align: center; margin-bottom: 40px; color: #bf953f; animation: blink 1.2s infinite; font-size: 22px; font-weight: 900; }
     @keyframes blink { 0%, 100% { opacity: 0; transform: translateY(-5px); } 50% { opacity: 1; transform: translateY(5px); } }
 
-    @media (max-width: 1000px) { .main-section { flex-direction: column; } .archive-section { grid-template-columns: 1fr; } }
+    @media (max-width: 1000px) { .main-section { flex-direction: column; } .archive-section { grid-template-columns: 1fr; } .back-nav { left: 15px; } }
   </style>
 </head>
 <body>
+
+<div class="header-sticky">
+    <a href="archive.html" class="back-nav"><i class="fa-solid fa-arrow-left"></i></a>
+    <div class="header-title">GOLD WAVE 뉴스 리포트</div>
+</div>
 
 <div class="container">
   <div class="main-section">
@@ -133,7 +135,7 @@
   <div class="logic-section">
     <div class="logic-title">📌 GOLDWAVE 데이터 증명: 데드 크로스가 시사하는 바</div>
     <div class="logic-paragraph">
-      2000년대 초반 압도적이었던 달러 보유고와 금의 격차가 무너졌습니다. 실제 달러 보유 수요는 감소하고 <span class="point-focus">금의 실질적 수요</span>가 이를 추월한 것은 통화 질서의 재편을 의미합니다.<br>
+      2000년대 초반 압도적이었던 달러 보유고와 금의 격차가 무너졌습니다. 실제 달러 보유 수요는 감소하고 <span class="point-focus">금의 실질적 수요</span>가 이를 추월한 것은 통화 질서의 재편을 의미합니다.<br><br>
       GOLDWAVE는 이러한 매크로 지표의 교차를 금값의 새로운 상승 동력으로 분석합니다.
     </div>
     <div class="pop-card">
@@ -149,9 +151,9 @@
   <div class="archive-title-label" style="margin-top: 100px;">PREVIOUS REPORT</div>
   <div class="archive-section">
     <a href="260409.html" class="archive-card">
-      <img src="https://i.imgur.com/udVSPai.png" class="archive-thumb" alt="4/9-1 뉴스">
-      <span style="font-size:12px; color:#666; display:block; margin-bottom:10px;">2026.04.09</span>
-      <b style="font-size:15px; color:#aaa;">휴전 속 ‘인하기대’ vs ‘위험선호’ 줄다리기</b>
+        <img src="https://i.imgur.com/udVSPai.png" class="archive-thumb" alt="4/9 뉴스">
+        <span style="font-size:12px; color:#666; display:block; margin-bottom:10px;">2026.04.09</span>
+        <b style="font-size:15px; color:#aaa;">휴전 속 ‘인하기대’ vs ‘위험선호’ 줄다리기</b>
     </a>
     <a href="260407.html" class="archive-card">
       <img src="https://i.imgur.com/L5mMTjI.jpeg" class="archive-thumb" alt="4/7-1 뉴스">
