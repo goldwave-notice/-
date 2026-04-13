@@ -9,7 +9,7 @@
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         body { margin: 0; padding: 0; background-color: #0b0d11; font-family: 'Pretendard', sans-serif; color: #e0e0e0; display: flex; flex-direction: column; align-items: center; padding-bottom: 150px; scroll-behavior: smooth; }
         
-        /* 🔴 [1, 2번] 상단 고정 헤더 */
+        /* [1, 2번] 상단 고정 헤더 */
         .header-sticky { 
             position: fixed; top: 0; width: 100%; 
             background: rgba(26, 29, 35, 0.95); 
@@ -19,7 +19,6 @@
         }
         .header-title { font-size: 13px; font-weight: 800; color: #bf953f; letter-spacing: 1px; }
 
-        /* [1번] 뒤로가기 화살표 (dashboard-new.html 연결) */
         .back-nav {
             position: absolute; left: 20px; top: 50%; transform: translateY(-50%);
             text-decoration: none; color: #bf953f; font-size: 20px;
@@ -29,11 +28,10 @@
 
         .container { width: 92%; max-width: 900px; margin-top: 100px; position: relative; }
         
-        /* 🔴 [3, 4, 5번] 중앙 브랜드 헤더 */
+        /* [3, 4, 5번] 중앙 브랜드 헤더 */
         .header-box-centered { text-align: center; margin-bottom: 60px; width: 100%; }
         .brand-logo { width: 55px; height: auto; margin-bottom: 15px; filter: drop-shadow(0 0 8px rgba(191, 149, 63, 0.5)); }
         .header-text h1 { color: #bf953f; font-size: 26px; margin: 0; font-weight: 800; letter-spacing: -0.5px; }
-        /* 5번: 골드웨이브 소개 (기존 페이지 스타일 통일) */
         .header-text p { color: #aaa; font-size: 14px; margin-top: 8px; font-weight: 700; line-height: 1.6; }
 
         /* 로직 탭 메뉴 */
@@ -47,8 +45,17 @@
         @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
         .logic-title-final { color: #ffffff; font-size: 32px; font-weight: 900; border-bottom: 2px solid rgba(191, 149, 63, 0.5); padding-bottom: 20px; margin-bottom: 35px; letter-spacing: -1.5px; }
 
-        /* 데이터 대시보드 */
-        .engine-display { width: 100%; height: 380px; display: flex; margin-bottom: 35px; border-radius: 12px; overflow: hidden; border: 1px solid #333; }
+        /* 🔴 데이터 대시보드 (모바일 가로 유지 핵심) */
+        .engine-display { 
+            width: 100%; 
+            height: 380px; 
+            display: flex; 
+            flex-direction: row; /* 가로 유지 */
+            margin-bottom: 35px; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            border: 1px solid #333; 
+        }
         .chart-area { flex: 1.6; position: relative; overflow: hidden; background: #000; border-right: 1px solid #333; }
         .chart-area video { width: 135%; height: auto; position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%); }
         .terminal-area { flex: 1; background: #000; padding: 15px; font-family: 'Courier New', monospace; font-size: 11px; overflow: hidden; }
@@ -64,12 +71,29 @@
         @keyframes heartBeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.015); border-color: #bf953f; } }
         .summary-gold-box span { color: #ffdb8e; font-weight: 900; font-size: 21px; letter-spacing: 1.2px; text-shadow: 0 0 10px rgba(255, 219, 142, 0.4); }
 
+        /* 영상 카드 & 홈 버튼 */
         .main-video-card { width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(191, 149, 63, 0.15); border-radius: 20px; padding: 20px; margin-bottom: 80px; transition: 0.5s; position: relative; overflow: hidden; }
         .main-video-card.playing { border: 2px solid #bf953f; box-shadow: 0 0 30px rgba(191, 149, 63, 0.4); transform: scale(1.02); }
         .video-box { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: #000; }
         #script-box { display: none; padding: 40px 25px; line-height: 1.8; color: #ccc; margin-top: 25px; background: rgba(191, 149, 63, 0.08); border-radius: 15px; border: 1px dashed rgba(191, 149, 63, 0.4); animation: fadeIn 0.8s; }
 
-        @media (max-width: 600px) { .header-text h1 { font-size: 22px; } .back-nav { left: 15px; } .engine-display { flex-direction: column; height: auto; } .chart-area { height: 250px; } .terminal-area { height: 150px; } }
+        /* 📱 모바일 세로 모드 대응 (가로 배열 강제 유지) */
+        @media (max-width: 600px) { 
+            .header-text h1 { font-size: 22px; } 
+            .back-nav { left: 15px; } 
+            
+            /* 모바일에서도 가로 나란히 유지 */
+            .engine-display { 
+                flex-direction: row; 
+                height: 220px; /* 폰 화면 높이에 맞게 조절 */
+            } 
+            .chart-area { height: 100%; } 
+            .terminal-area { height: 100%; padding: 8px; font-size: 8px; } 
+            .log-line { font-size: 7px; margin: 2px 0; }
+            .logic-title-final { font-size: 22px; }
+            .logic-text-final p { font-size: 14px; line-height: 1.8; }
+            .summary-gold-box span { font-size: 16px; }
+        }
     </style>
 </head>
 <body>
@@ -100,7 +124,7 @@
                 <div class="engine-display">
                     <div class="chart-area"><video autoplay loop muted playsinline><source src="https://goldwave-notice.github.io/-/수익그래프1.mp4" type="video/mp4"></video></div>
                     <div class="terminal-area">
-                        <div class="terminal-header"><span>DATA LOG CENTER</span><span class="live-tag">● LIVE</span></div>
+                        <div class="terminal-header"><span>LOG CENTER</span><span class="live-tag">●</span></div>
                         <div id="terminal-log1"></div>
                     </div>
                 </div>
@@ -115,9 +139,9 @@
             <div id="logic2" class="logic-card">
                 <div class="logic-title-final">런던 로직 : <span style="color:#aaa;">단기 / 안정형</span> - 시간대 특화 단기 전략</div>
                 <div class="engine-display">
-                    <div class="chart-area" style="background: #000; border: 1px dashed #444; display: flex; align-items: center; justify-content: center;"><p style="color:#444;">[ 런던 세션 데이터 대기 중 ]</p></div>
+                    <div class="chart-area" style="background: #000; border: 1px dashed #444; display: flex; align-items: center; justify-content: center;"><p style="color:#444; font-size:10px;">[ LONDON DATA ]</p></div>
                     <div class="terminal-area">
-                        <div class="terminal-header"><span>LONDON LOG CENTER</span><span class="live-tag">● LIVE</span></div>
+                        <div class="terminal-header"><span>LONDON LOG</span><span class="live-tag">●</span></div>
                         <div id="terminal-log2"></div>
                     </div>
                 </div>
@@ -133,9 +157,9 @@
             <div id="logic3" class="logic-card">
                 <div class="logic-title-final">뉴욕 로직 : <span style="color:#eee;">중기 / 확장형</span> - 변동성 활용 확장 전략</div>
                 <div class="engine-display">
-                    <div class="chart-area" style="background: #000; border: 1px dashed #555; display: flex; align-items: center; justify-content: center;"><p style="color:#555;">[ 뉴욕 세션 데이터 대기 중 ]</p></div>
+                    <div class="chart-area" style="background: #000; border: 1px dashed #555; display: flex; align-items: center; justify-content: center;"><p style="color:#555; font-size:10px;">[ NY DATA ]</p></div>
                     <div class="terminal-area">
-                        <div class="terminal-header"><span>NEWYORK LOG CENTER</span><span class="live-tag">● LIVE</span></div>
+                        <div class="terminal-header"><span>NEWYORK LOG</span><span class="live-tag">●</span></div>
                         <div id="terminal-log3"></div>
                     </div>
                 </div>
@@ -175,12 +199,12 @@
                 if(!box) return;
                 const line = document.createElement('div');
                 line.className = 'log-line';
-                line.innerHTML = `> ${session} ANALYSIS... [OK] | PROFIT: <span class="log-profit">+$${(Math.random()*2000+500).toLocaleString()}</span>`;
+                line.innerHTML = `> ${session} OK | PROFIT: <span class="log-profit">+$${(Math.random()*1000+500).toFixed(0)}</span>`;
                 box.prepend(line);
-                if(box.children.length > 12) box.removeChild(box.lastChild);
+                if(box.children.length > 8) box.removeChild(box.lastChild);
             }, 400);
         };
-        createLog('terminal-log1', 'GOLD'); createLog('terminal-log2', 'LONDON'); createLog('terminal-log3', 'NEWYORK');
+        createLog('terminal-log1', 'GOLD'); createLog('terminal-log2', 'LON'); createLog('terminal-log3', 'NY');
         function highlightCard(id) { document.getElementById(id).classList.add('playing'); }
         function removeHighlight(id) { document.getElementById(id).classList.remove('playing'); }
     </script>
