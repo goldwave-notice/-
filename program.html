@@ -17,11 +17,12 @@
         
         body { display: flex; flex-direction: column; align-items: center; padding-bottom: 150px; scroll-behavior: smooth; }
         
+        /* [고정] 상단 고정 헤더 */
         .header-sticky { position: fixed; top: 0; width: 100%; min-width: 1200px; background: rgba(26, 29, 35, 0.95); border-bottom: 1px solid rgba(191, 149, 63, 0.3); z-index: 10000; padding: 15px 0; text-align: center; backdrop-filter: blur(10px); }
         .header-title { font-size: 13px; font-weight: 800; color: #bf953f; letter-spacing: 1px; }
         .back-nav { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); text-decoration: none; color: #bf953f; font-size: 20px; }
 
-        .container { width: 1100px; margin-top: 100px; }
+        .container { width: 1100px; margin-top: 120px; }
 
         .header-box-centered { text-align: center; margin-bottom: 80px; width: 100%; }
         .brand-logo { width: 55px; height: auto; margin-bottom: 15px; filter: drop-shadow(0 0 8px rgba(191, 149, 63, 0.5)); }
@@ -29,7 +30,9 @@
         .header-text p { color: #aaa; font-size: 14px; margin-top: 8px; font-weight: 700; line-height: 1.6; }
 
         .logic-card { background: #14171d; border: 1px solid rgba(191, 149, 63, 0.2); border-radius: 25px; padding: 40px; margin-bottom: 100px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); text-align: center; box-sizing: border-box; width: 100%; }
-        .logic-title-final { color: #ffffff; font-size: 28px; font-weight: 900; border-left: 5px solid #bf953f; padding-left: 20px; margin-bottom: 35px; text-align: left; }
+        
+        /* 실버 델타 한 줄 유지를 위한 폰트 크기 */
+        .logic-title-final { color: #ffffff; font-size: 24px; font-weight: 900; border-left: 5px solid #bf953f; padding-left: 20px; margin-bottom: 35px; text-align: left; white-space: nowrap; }
 
         .engine-display { width: 100%; aspect-ratio: 16 / 9; max-height: 480px; display: flex; flex-direction: row; background: #000; border-radius: 15px; overflow: hidden; border: 1px solid #333; }
         .chart-area { flex: 1.8; position: relative; background: #000; border-right: 1px solid #222; }
@@ -51,17 +54,17 @@
         .blink-fast { animation: blinker 0.5s linear infinite; }
         @keyframes blinker { 50% { opacity: 0; } }
 
+        /* 로직 설명 텍스트 한 줄 유지 보정 */
         .logic-text-final { margin: 30px auto; max-width: 900px; text-align: center; }
-        /* 🔴 폰트 크기를 기존 18px -> 16px로 살짝 줄이고 간격을 조정하여 한 줄 유지 강화 */
-        .logic-text-final p { font-size: 16px; line-height: 2.2; color: #ddd; font-weight: 500; display: inline-block; text-align: left; margin: 0; width: 100%; white-space: nowrap; letter-spacing: -0.5px; }
+        .logic-text-final p { font-size: 16px; line-height: 2.2; color: #ddd; font-weight: 500; display: inline-block; text-align: left; margin: 0; width: 100%; white-space: nowrap; letter-spacing: -0.8px; }
         
         .point-green { color: #00ff00; font-weight: 700; }
         .point-green-bold { color: #00ff00; font-weight: 800; }
         .point-bold { font-weight: 800; color: #fff; }
 
-        /* 🔴 포인트 박스 텍스트도 22px -> 19px로 조절하여 쾌적하게 한 줄 유지 */
-        .point-box-3d { background: linear-gradient(145deg, #1e222a, #12151b); border: 1px solid rgba(191, 149, 63, 0.8); border-radius: 8px; padding: 12px 0; margin-top: 25px; box-shadow: 0 0 15px rgba(191, 149, 63, 0.3); width: 100%; display: flex; justify-content: center; align-items: center; margin-left: auto; margin-right: auto; }
-        .point-box-3d span { color: #bf953f; font-weight: 900; font-size: 19px; letter-spacing: 0px; text-align: center; white-space: nowrap; }
+        /* 포인트 박스 텍스트 보정 */
+        .point-box-3d { background: linear-gradient(145deg, #1e222a, #12151b); border: 1px solid rgba(191, 149, 63, 0.8); border-radius: 8px; padding: 12px 15px; margin-top: 25px; box-shadow: 0 0 15px rgba(191, 149, 63, 0.3); width: 100%; display: flex; justify-content: center; align-items: center; margin-left: auto; margin-right: auto; box-sizing: border-box; }
+        .point-box-3d span { color: #bf953f; font-weight: 900; font-size: 18px; letter-spacing: -1px; text-align: center; white-space: nowrap; overflow: hidden; }
 
         #brand-story-section { display: none; width: 100%; animation: fadeIn 0.8s; margin-top: 20px; }
         .brand-video-box { width: 1100px; aspect-ratio: 16/9; border-radius: 20px; overflow: hidden; border: 1px solid rgba(191, 149, 63, 0.3); margin-bottom: 40px; }
@@ -80,6 +83,7 @@
     </style>
 </head>
 <body>
+
     <div class="header-sticky">
         <a href="dashboard-new.html" class="back-nav"><i class="fa-solid fa-arrow-left"></i></a>
         <div class="header-title">GOLD WAVE 프로그램</div>
@@ -98,7 +102,7 @@
             <div class="logic-card">
                 <div class="logic-title-final"><span style="color:#f5c540">MAIN</span> : 구조 기반 추세 대응</div>
                 <div class="engine-display">
-                    <div class="chart-area"><video autoplay loop muted playsinline><source src="https://i.imgur.com/PaAy0hs.mp4"></video><img src="https://i.imgur.com/9VUt3sN.png" class="video-watermark"></div>
+                    <div class="chart-area"><video autoplay loop muted playsinline><source src="https://i.imgur.com/PaAy0hs.mp4" type="video/mp4"></video><img src="https://i.imgur.com/9VUt3sN.png" class="video-watermark"></div>
                     <div class="terminal-area">
                         <div class="terminal-header"><span>ANALYSIS CENTER</span><span style="color:#ff3333" class="blink-slow">● LIVE</span></div>
                         <div class="log-scroll" id="log-main"></div>
@@ -111,7 +115,7 @@
             <div class="logic-card">
                 <div class="logic-title-final"><span style="color:#f5c540">LONDON 세션</span> : 단기 수익 회수 중심 전략</div>
                 <div class="engine-display">
-                    <div class="chart-area"><video autoplay loop muted playsinline><source src="https://i.imgur.com/rZa7TBQ.mp4"></video><img src="https://i.imgur.com/9VUt3sN.png" class="video-watermark"></div>
+                    <div class="chart-area"><video autoplay loop muted playsinline><source src="https://i.imgur.com/rZa7TBQ.mp4" type="video/mp4"></video><img src="https://i.imgur.com/9VUt3sN.png" class="video-watermark"></div>
                     <div class="terminal-area">
                         <div class="terminal-header"><span>LONDON SESSION LOG</span><span style="color:#ff3333" class="blink-mid">● LIVE</span></div>
                         <div class="log-scroll" id="log-london"></div>
@@ -135,7 +139,7 @@
             </div>
 
             <div class="logic-card">
-                <div class="logic-title-final" style="font-size: 24px;"><span style="color:#f5c540">SILVER DELTA NEUTRAL REBALANCING</span> : 롱·숏 동시 운용 기반 자동 리밸런싱 전략</div>
+                <div class="logic-title-final" style="font-size: 21px;"><span style="color:#f5c540">SILVER DELTA NEUTRAL REBALANCING</span> : 롱·숏 동시 운용 기반 자동 리밸런싱 전략</div>
                 <div class="engine-display">
                     <div class="chart-area"><video autoplay loop muted playsinline><source src="https://i.imgur.com/5U2dvAV.mp4" type="video/mp4"></video><img src="https://i.imgur.com/9VUt3sN.png" class="video-watermark"></div>
                     <div class="terminal-area">
@@ -168,7 +172,6 @@
     </div>
 
     <script>
-        // 자바스크립트 로직은 이전과 동일
         function toggleBrandMode() {
             const logicGroup = document.getElementById('logic-group');
             const storySection = document.getElementById('brand-story-section');
