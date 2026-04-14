@@ -17,7 +17,6 @@
         
         body { display: flex; flex-direction: column; align-items: center; padding-bottom: 150px; scroll-behavior: smooth; }
         
-        /* [고정] 상단 고정 헤더 */
         .header-sticky { position: fixed; top: 0; width: 100%; min-width: 1200px; background: rgba(26, 29, 35, 0.95); border-bottom: 1px solid rgba(191, 149, 63, 0.3); z-index: 10000; padding: 15px 0; text-align: center; backdrop-filter: blur(10px); }
         .header-title { font-size: 13px; font-weight: 800; color: #bf953f; letter-spacing: 1px; }
         .back-nav { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); text-decoration: none; color: #bf953f; font-size: 20px; }
@@ -30,8 +29,6 @@
         .header-text p { color: #aaa; font-size: 14px; margin-top: 8px; font-weight: 700; line-height: 1.6; }
 
         .logic-card { background: #14171d; border: 1px solid rgba(191, 149, 63, 0.2); border-radius: 25px; padding: 40px; margin-bottom: 100px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); text-align: center; box-sizing: border-box; width: 100%; }
-        
-        /* 실버 델타 한 줄 유지를 위한 폰트 크기 */
         .logic-title-final { color: #ffffff; font-size: 24px; font-weight: 900; border-left: 5px solid #bf953f; padding-left: 20px; margin-bottom: 35px; text-align: left; white-space: nowrap; }
 
         .engine-display { width: 100%; aspect-ratio: 16 / 9; max-height: 480px; display: flex; flex-direction: row; background: #000; border-radius: 15px; overflow: hidden; border: 1px solid #333; }
@@ -54,17 +51,17 @@
         .blink-fast { animation: blinker 0.5s linear infinite; }
         @keyframes blinker { 50% { opacity: 0; } }
 
-        /* 로직 설명 텍스트 한 줄 유지 보정 */
         .logic-text-final { margin: 30px auto; max-width: 900px; text-align: center; }
-        .logic-text-final p { font-size: 16px; line-height: 2.2; color: #ddd; font-weight: 500; display: inline-block; text-align: left; margin: 0; width: 100%; white-space: nowrap; letter-spacing: -0.8px; }
+        /* 🔴 런던 세션 문장이 나가지 않도록 letter-spacing 보정 및 자폭 최적화 */
+        .logic-text-final p { font-size: 16px; line-height: 2.2; color: #ddd; font-weight: 500; display: inline-block; text-align: left; margin: 0; width: 100%; white-space: nowrap; letter-spacing: -1.0px; }
         
         .point-green { color: #00ff00; font-weight: 700; }
         .point-green-bold { color: #00ff00; font-weight: 800; }
         .point-bold { font-weight: 800; color: #fff; }
 
-        /* 포인트 박스 텍스트 보정 */
+        /* 🔴 모든 포인트 박스의 글자 크기를 18px로 통일 */
         .point-box-3d { background: linear-gradient(145deg, #1e222a, #12151b); border: 1px solid rgba(191, 149, 63, 0.8); border-radius: 8px; padding: 12px 15px; margin-top: 25px; box-shadow: 0 0 15px rgba(191, 149, 63, 0.3); width: 100%; display: flex; justify-content: center; align-items: center; margin-left: auto; margin-right: auto; box-sizing: border-box; }
-        .point-box-3d span { color: #bf953f; font-weight: 900; font-size: 18px; letter-spacing: -1px; text-align: center; white-space: nowrap; overflow: hidden; }
+        .point-box-3d span { color: #bf953f; font-weight: 900; font-size: 18px; letter-spacing: -0.5px; text-align: center; white-space: nowrap; overflow: hidden; }
 
         #brand-story-section { display: none; width: 100%; animation: fadeIn 0.8s; margin-top: 20px; }
         .brand-video-box { width: 1100px; aspect-ratio: 16/9; border-radius: 20px; overflow: hidden; border: 1px solid rgba(191, 149, 63, 0.3); margin-bottom: 40px; }
